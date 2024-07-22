@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -22,9 +23,8 @@ public class Order {
     private List<OrderItem> items;
     private Payment payment;
     private Ship ship;
-    private Account user;
-    private int orderCount;
-    
+    private UserAccount user;
+    private Address address;
 
     public Order() {
     }
@@ -39,26 +39,11 @@ public class Order {
         this.total_mount = total_mount;
     }
 
-    public Order(int order_ID, int user_ID, String order_status, Date order_date, int pay_ID, int shipID, float total_mount, List<OrderItem> items, Payment payment, Ship ship, Account user) {
-        this.order_ID = order_ID;
-        this.user_ID = user_ID;
-        this.order_status = order_status;
-        this.order_date = order_date;
-        this.pay_ID = pay_ID;
-        this.shipID = shipID;
-        this.total_mount = total_mount;
-        this.items = items;
-        this.payment = payment;
-        this.ship = ship;
-        this.user = user;
-    }
-    
-
-    public Account getUser() {
+    public UserAccount getUser() {
         return user;
     }
 
-    public void setUser(Account user) {
+    public void setUser(UserAccount user) {
         this.user = user;
     }
     
@@ -69,15 +54,13 @@ public class Order {
         return order_ID;
     }
 
-    public int getOrderCount() {
-        return orderCount;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setOrderCount(int orderCount) {
-        this.orderCount = orderCount;
+    public void setAddress(Address address) {
+        this.address = address;
     }
-
-    
     
 
     public void setOrder_ID(int order_ID) {
@@ -163,4 +146,3 @@ public class Order {
   
 
 }
-

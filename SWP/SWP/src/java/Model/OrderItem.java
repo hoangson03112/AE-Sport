@@ -16,7 +16,6 @@ public class OrderItem {
    private int size_ID;
    private Product product;
    private Size size;
-   private Order order;
 
    public OrderItem() {
    }
@@ -50,14 +49,6 @@ public class OrderItem {
 
     public void setSize(Size size) {
         this.size = size;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
  

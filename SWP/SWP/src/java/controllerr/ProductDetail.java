@@ -1,9 +1,7 @@
 package controllerr;
 
 import DBContext.DAOFeedback;
-import Model.Color;
 import Model.Feedback;
-import Model.Size;
 import data.ImgContext;
 import data.ProductContext;
 import entity.ProductSizeColor;
@@ -14,8 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductDetail extends HttpServlet {
 
@@ -29,19 +30,15 @@ public class ProductDetail extends HttpServlet {
         ImgContext imgDB = new ImgContext();
 
         product productDetail = productDB.getProduct(Integer.parseInt(productId));
-        ArrayList<Size> listSize = productDB.getSizebyProductId(Integer.parseInt(productId));
         ArrayList<img> listImg = imgDB.getImgsofProduct(Integer.parseInt(productId));
-        ArrayList<Color> listColor = productDB.getColorbyProductId(Integer.parseInt(productId));
-
+        ArrayList<ProductSizeColor> listSizeandColorofProduct = productDB.getColorandSizeofProduct(Integer.parseInt(productId));
         List<Feedback> listbyproID = daofb.getFeedbackByProductId(Integer.parseInt(productId));
 
         request.setAttribute("listbyproID", listbyproID);
-        System.out.println(listColor);
-        request.setAttribute("listSize", listSize);
+        request.setAttribute("listSizeandColorofProduct", listSizeandColorofProduct);
         request.setAttribute("listImg", listImg);
-        request.setAttribute("listColor", listColor);
-        request.setAttribute("productDetail", productDetail);
 
+        request.setAttribute("productDetail", productDetail);
         request.getRequestDispatcher("/view/Product/productDetail.jsp").forward(request, response);
 
     }
@@ -54,12 +51,18 @@ public class ProductDetail extends HttpServlet {
         String color = request.getParameter("color");
         String number = request.getParameter("number");
         String action = request.getParameter("action");
-        System.out.println(action);
-        System.out.println(productId);
-        System.out.println(color);
-        System.out.println(size);
-        System.out.println(number);
+        ProductContext productDB = new ProductContext();
+        product productDetail = productDB.getProduct(Integer.parseInt(productId));
 
+        int quantity = Integer.parseInt(request.getParameter("number"));
+        HttpSession session = request.getSession();
+        Map<product, Integer> cart = (HashMap<product, Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+        cart.put(productDetail, quantity);
+        session.setAttribute("cart", cart);
+        response.sendRedirect("CartPage");
     }
 
     @Override

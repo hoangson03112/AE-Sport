@@ -29,6 +29,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
             />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <style>
             .form-check-input {
                 display: none;
@@ -82,7 +83,6 @@
             .btn-pink {
                 background-color: #fcb2b2 !important;
             }
-     
         </style>
     </head>
 
@@ -91,8 +91,8 @@
         <jsp:include page="../HomePage/header.jsp"/>
         <div class="m-223 container  ">
             <nav aria-label="breadcrumb" >
-                <ol class="breadcrumb my-5 py-5 ms-0 transition-1">
-                    <li class="breadcrumb-item ">
+                <ol class="breadcrumb m-5 ms-0 transition-1">
+                    <li class="breadcrumb-item">
                         <span><i class="bi bi-house-door mx-3"></i></span>
                         <a href="HomePage" class="text-decoration-none text-black">Home</a>
                     </li>
@@ -134,19 +134,19 @@
                         <label for="size">Size</label>
                         <div id="size-options" class="mt-3 ms-3">
                             <div id="sizeForm" class="d-flex">
-                                <c:forEach var="size" items="${listSize}">
-                                    <input type="radio" class="btn-check size-radio" name="size" id="size${size.size_ID}" value="${size.size_ID}" autocomplete="off">
-                                    <label class="btn mx-1 bg-body-tertiary d-flex justify-content-center align-items-center" for="size${size.size_ID}">${size.size_Name}</label>
+                                <c:forEach var="size" items="${listSizeandColorofProduct}">
+                                    <input type="radio" class="btn-check size-radio" name="size" id="size${size.getSize().getSize_Name()}" value="${size.getSize().getSize_Name()}" autocomplete="off">
+                                    <label class="btn mx-1 bg-body-tertiary d-flex justify-content-center align-items-center" for="size${size.getSize().getSize_Name()}">${size.getSize().getSize_Name()}</label>
                                 </c:forEach>
                             </div>
                         </div>
 
                         <label for="color">Màu</label>
                         <div class="d-flex mt-3 justify-content-start">
-                            <c:forEach var="color" items="${listColor}">
+                            <c:forEach var="color" items="${listSizeandColorofProduct}">
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="radio${color.color_Name}" name="color" value="${color.getColor_ID()}">
-                                    <label class="form-check-label" style="background-color:${color.getCode()}; width: 30px; height: 30px" for="radio${color.color_Name}"></label>
+                                    <input type="radio" class="form-check-input" id="radio${color.getColor().getColor_Name()}" name="color" value="${color.getColor().getColor_Name()}">
+                                    <label class="form-check-label" style="background-color:${color.getColor().getColor_Name()}; width: 30px; height: 30px" for="radio${color.getColor().getColor_Name()}"></label>
                                 </div>
                             </c:forEach>
                         </div>
@@ -165,7 +165,7 @@
                         <h1 class="text-danger w-50 text-center">${productDetail.price}đ</h1>
                         <div class="mt-3">
                             <button type="submit" class="fs-5 btn btn-danger w-50" value="1" name="action" id="buyNowBtn">Mua Ngay!</button>
-                            <button type="submit" class="fs-4 btn ms-2 bg-body-tertiary text-danger" value="2" name="action" id="addToCartBtn"><i class="bi bi-cart-plus"></i></button>
+                            <button type="button" onclick="addToCart(${param.productId})" class="fs-4 btn ms-2 bg-body-tertiary text-danger" value="2" name="action" id="addToCartBtn"><i class="bi bi-cart-plus"></i></button>
                         </div>
                     </form>
 
@@ -336,8 +336,33 @@
 
         });
 
+        const addToCart = (productId) => {
+            const url = "<%=request.getContextPath()%>" + "/CartPage";
+            var sizeSelected = document.querySelector('input[name="size"]:checked');
+            var colorSelected = document.querySelector('input[name="color"]:checked');
 
-
+            if (!colorSelected && !sizeSelected) {
+                alert("Vui lòng chọn Màu và Size tiếp tục.");
+            } else if (!sizeSelected && colorSelected) {
+                alert("Vui lòng chọn Size tiếp tục.");
+            } else if (!colorSelected && sizeSelected) {
+                alert("Vui lòng chọn Màu tiếp tục.");
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        productId: productId,
+                        number: $("#numberInput").val()
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        $("#cart-size").text(data.size);
+                        alert(data.message);
+                    }
+                });
+            }
+        };
 
     </script>
 </body>

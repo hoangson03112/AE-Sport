@@ -29,6 +29,7 @@ public class product {
     private Discount discount;
     private Category cate;
     private SubCategory subCate;
+        private int inventory_number;
     
     
     
@@ -94,6 +95,14 @@ public class product {
     public String getStatus() {
         return status;
     }
+     public int getInventory_number() {
+        return inventory_number;
+    }
+
+    public void setInventory_number(int inventory_number) {
+        this.inventory_number = inventory_number;
+    }
+
 
     public void setStatus(String status) {
         this.status = status;
@@ -146,5 +155,33 @@ public class product {
     public void setDiscount(Discount discount) {
         this.discount = discount;
     }
+@Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + this.productID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final product other = (product) obj;
+        return this.productID == other.productID;
+    }
+
+    @Override
+    public String toString() {
+        return "product{" + "productID=" + productID + ", feedback=" + feedback + ", price=" + price + ", image=" + image + ", description=" + description + ", status=" + status + ", sport=" + sport + ", typeID=" + typeID + ", productName=" + productName + ", brand=" + brand + ", quantity_sold=" + quantity_sold + ", discount=" + discount + ", cate=" + cate + ", subCate=" + subCate + ", inventory_number=" + inventory_number + '}';
+    }
+
+   
 
 }

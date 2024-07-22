@@ -103,6 +103,42 @@ public class ProductContext extends DBContext.DBContext {
         return p;
     }
 
+    
+     public ArrayList<ProductSizeColor> getColorandSizeofProduct(int id) {
+        ArrayList<ProductSizeColor> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [dbo].[Size_Color] sc\n"
+                    + "  left join [dbo].[Size] s\n"
+                    + "  on s.size_ID= sc.size_id\n"
+                    + "  left join [dbo].[Color] c\n"
+                    + "  on sc.color_id=c.color_id\n"
+                    + "  where sc.product_ID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                ProductSizeColor psc = new ProductSizeColor();
+                psc.setProductId(rs.getInt("product_ID"));
+
+                Color c = new Color();
+                c.setColor_ID(rs.getInt("color_id"));
+                c.setColor_Name(rs.getString("color_Name"));
+                psc.setColor(c);
+                Size s = new Size();
+                s.setSize_ID(rs.getInt("size_id"));
+                s.setSize_Name(rs.getString("size_name"));
+                psc.setSize(s);
+                psc.setQuantity(rs.getInt("quantity"));
+                list.add(psc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+     
     public ArrayList<product> getproductByCondition(int Subcategory_ID, int category_ID, String type, String status) {
         ArrayList<product> list = new ArrayList<>();
         try {

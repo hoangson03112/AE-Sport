@@ -1,11 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Chi Tiết Đơn Hàng</title>
+    <title>Order Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -91,31 +91,31 @@
                 <i class="fas fa-user"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="./HomePage">Trang Chủ</a>
+                <a class="dropdown-item" href="./HomePage">Home</a>
             </div>
         </div>
     </div>
-    <h2 class="mt-3 text-center">Chi Tiết Đơn Hàng</h2>
+    <h2 class="mt-3 text-center">Order Details</h2>
     <div class="progress mb-4">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"></div>
     </div>
     <div class="order-status">
-        <span>Đơn Hàng Đã Đặt</span>
-        <span>Đã Đóng Gói</span>
-        <span>Đang Vận Chuyển</span>
-        <span>Đã Giao</span>
+        <span>Order Placed</span>
+        <span>Packed</span>
+        <span>Shipping</span>
+        <span>Delivered</span>
     </div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Mã Đơn Hàng: <c:out value="${order.order_ID}"/></h5>
-            <p class="card-text">Ngày Đặt Hàng: <c:out value="${order.order_date}"/> <span class="badge badge-success">Đã Thanh Toán</span></p>
+            <h5 class="card-title">Order ID: <c:out value="${order.order_ID}"/></h5>
+            <p class="card-text">Order Date: <c:out value="${order.order_date}"/> <span class="badge badge-success">Paid</span></p>
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Sản Phẩm</th>
-                    <th>Số Lượng</th>
-                    <th>Tình Trạng</th>
-                    <th>Giá</th>
+                    <th>Products</th>
+                    <th>Items</th>
+                    <th>Status</th>
+                    <th>Amounts</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -127,7 +127,7 @@
                         </td>
                         <td><c:out value="${item.quantity}"/></td>
                         <td><span id="currentStatus"><c:out value="${order.order_status}"/></span></td>
-                        <td><c:out value="${item.price_unit}"/>VND</td>
+                        <td>$<c:out value="${item.price_unit}"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -136,32 +136,33 @@
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="orderId" value="<c:out value='${order.order_ID}'/>">
                 <div class="form-group">
-                    <label for="status">Cập Nhật Tình Trạng Đơn Hàng:</label>
+                    <label for="status">Update Order Status:</label>
                     <select class="form-control" id="status" name="status">
-                        <option value="Đơn Hàng Đã Đặt">Đơn Hàng Đã Đặt</option>
-                        <option value="Đã Đóng Gói">Đã Đóng Gói</option>
-                        <option value="Đang Vận Chuyển">Đang Vận Chuyển</option>
-                        <option value="Đã Giao">Đã Giao</option>
+                        <option value="Order Placed">Order Placed</option>
+                        <option value="Packed">Packed</option>
+                        <option value="Shipping">Shipping</option>
+                        <option value="Delivered">Delivered</option>
                     </select>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="updateStatus()">Cập Nhật Tình Trạng</button>
+                <button type="button" class="btn btn-primary" onclick="updateStatus()">Update Status</button>
             </form>
+
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="order-summary">
-                <h5>Tóm Tắt Đơn Hàng</h5>
-                <p>Thành Tiền: <span class="float-right"><c:out value="${order.total_mount}"/>VND</span></p>
-                <p>Phí Vận Chuyển: <span class="float-right"><c:out value="${order.ship.ship_cost}"/>VND</span></p>
-                <p><strong>Tổng Số Tiền:</strong> <span class="float-right"><c:out value="${order.total_mount}"/>VND</span></p>
+                <h5>Order Summary</h5>
+                <p>Sub Total: <span class="float-right">$<c:out value="${order.total_mount}"/></span></p>
+                <p>Shipping Charge: <span class="float-right">$<c:out value="${order.ship.ship_cost}"/></span></p>
+                <p><strong>Total Amount:</strong> <span class="float-right">$<c:out value="${order.total_mount}"/></span></p>
             </div>
         </div>
         <div class="col-md-6">
             <div class="payment-details">
-                <h5>Thông Tin Thanh Toán</h5>
-                <p>Phương Thức Thanh Toán: <span class="float-right">Thẻ Tín Dụng</span></p>
-                <p><strong>Tổng Số Tiền:</strong> <span class="float-right"><c:out value="${order.total_mount}"/>VND</span></p>
+                <h5>Payment Details</h5>
+                <p>Payment Method: <span class="float-right">Credit Card</span></p>
+                <p><strong>Total Amount:</strong> <span class="float-right">$<c:out value="${order.total_mount}"/></span></p>
             </div>
         </div>
     </div>
@@ -204,7 +205,7 @@
             };
 
             xhr.onerror = function () {
-                alert("Không thể cập nhật tình trạng đơn hàng.");
+                alert("Failed to update order status.");
             };
 
             xhr.send(new URLSearchParams(formData));
@@ -213,10 +214,10 @@
         function updateProgressBar(status) {
             var progressBar = document.querySelector(".progress-bar");
             var statusWidth = {
-                "Đơn Hàng Đã Đặt": "25%",
-                "Đã Đóng Gói": "50%",
-                "Đang Vận Chuyển": "75%",
-                "Đã Giao": "100%"
+                "Order Placed": "25%",
+                "Packed": "50%",
+                "Shipping": "75%",
+                "Delivered": "100%"
             };
 
             progressBar.style.width = statusWidth[status] || "0%";

@@ -209,13 +209,37 @@
         <servlet-class>controllerr.Feedback2</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SalesReportController</servlet-name>
-        <servlet-class>controllerr.SalesReportController</servlet-class>
+        <servlet-name>CartCheckout</servlet-name>
+        <servlet-class>controllerr.CartCheckoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReportProductController</servlet-name>
-        <servlet-class>controllerr.ReportProductController</servlet-class>
+        <servlet-name>DeleteItem</servlet-name>
+        <servlet-class>controllerr.DeleteItemController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>controllerr.CartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>controllerr.CheckoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartCheckout</servlet-name>
+        <url-pattern>/cart-change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/CartPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteItem</servlet-name>
+        <url-pattern>/deleteItem</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/HomePage</url-pattern>
@@ -423,14 +447,6 @@
     <servlet-mapping>
         <servlet-name>Feedback2</servlet-name>
         <url-pattern>/feedback2</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SalesReportController</servlet-name>
-        <url-pattern>/salesReport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReportProductController</servlet-name>
-        <url-pattern>/reportProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

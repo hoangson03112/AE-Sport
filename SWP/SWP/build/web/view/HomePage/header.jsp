@@ -136,7 +136,7 @@
                         <span>&#124;</span>
                         <li class="mx-4">
                             <c:if test="${sessionScope.CRRAccount == null}">
-                                <a class="font-monospace text-decoration-none text-white" href="Login">Đăng Nhập</a>
+                                <a class="font-monospace text-decoration-none text-white" href="view/Login.jsp">Đăng Nhập</a>
                             </c:if>
                             <c:if test="${sessionScope.CRRAccount != null}">
                                 <a href="view/ViewProfile.jsp" class="font-monospace text-decoration-none text-white">${sessionScope.CRRAccount.getFull_Name()}</a>
@@ -231,9 +231,10 @@
                             <span class="bg-white border-end-0 pe-0" id="search-icon"><i class="bi bi-search"></i></span>
                             <input type="text" class="form-control border-0 form-control" placeholder="Tìm Kiếm Sản Phẩm" aria-label="Search" aria-describedby="search-icon" />
                         </div>
-                        <a href="#" class="col-1 fs-2 text-danger">
+                                    <a href="<%=request.getContextPath()%>/CartPage" class="col-1 fs-2 text-danger">
                             <i class="bi bi-cart">
-                                <span class="position-absolute mt-3 translate-middle badge rounded-pill bg-danger fs-10"><%=count%></span>
+                                <!--<span class="position-absolute mt-3 translate-middle badge rounded-pill bg-danger fs-10"><%=count%></span>-->
+                                <span id="cart-size" class="position-absolute mt-3 translate-middle badge rounded-pill bg-danger fs-10">${sessionScope.cart.size()}</span>
                             </i>
                         </a>
                     </div>
