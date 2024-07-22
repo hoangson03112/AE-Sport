@@ -209,7 +209,7 @@
             <div class="col-md-8 cart">
                 <div class="title">
                     <div class="row">
-                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                        <div class="col"><h4><b>Giỏ Hàng</b></h4></div>
                         <div class="col align-self-center text-right text-muted">${sessionScope.cart.size()} items</div>
                     </div>
                 </div>    
@@ -235,27 +235,27 @@
                         </div>
                     </div>
                 </c:forEach>
-                <div class="back-to-shop"><a href="#" onclick="history.back()">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                <div class="back-to-shop"><a href="#" onclick="history.back()">&leftarrow;</a><span class="text-muted">Trở Lại Sản Phẩm</span></div>
             </div>
             <div class="col-md-4 summary">
-                <div><h5><b>Summary</b></h5></div>
+                <div><h5><b>Tóm Tắt</b></h5></div>
                 <hr>
                 <div class="row">
-                    <div class="col" style="padding-left:0;">ITEMS ${sessionScope.cart.size()}</div>
+                    <div class="col" style="padding-left:0;">Sản Phẩm ${sessionScope.cart.size()}</div>
                     <div class="col text-right" id="total-price">${String.format("%.2f", requestScope.total)} $</div>
                 </div>
                 <form>
-                    <p>SHIPPING</p>
-                    <select><option class="text-muted">5$</option></select>
-                    <p>GIVE CODE</p>
-                    <input id="code" placeholder="Enter your code">
+                    <p>Phí Giao Hàng</p>
+                    <select><option class="text-muted">5đ</option></select>
+                    <p>Nhập Mã </p>
+                    <input id="code" placeholder="Nhập Mã Giảm Giá">
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                    <div class="col">TOTAL PRICE</div>
+                    <div class="col">Tổng Giá</div>
                     <div class="col text-right" id="price-shipping">${String.format("%.2f", requestScope.total + 5)}$</div>
                 </div>
                     <c:if test="${requestScope.total != 0}">
-                        <button class="btn" onclick="window.location.href = '${pageContext.request.contextPath}/checkout'">CHECKOUT</button>
+                        <button class="btn" onclick="window.location.href = '${pageContext.request.contextPath}/checkout'">Thanh Toán</button>
                     </c:if>
             </div>
         </div>

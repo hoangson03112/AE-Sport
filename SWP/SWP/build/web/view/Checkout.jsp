@@ -130,21 +130,21 @@
                     <div class="col-lg-3">
                         <div class="card position-sticky top-0">
                             <div class="p-3 bg-light bg-opacity-10">                           
-                                <h6 class="card-title mb-3">Order Summary</h6>
+                                <h6 class="card-title mb-3">Chi Tiết Đơn Hàng</h6>
                                 <div class="d-flex justify-content-between mb-1 small">
-                                    <span>Subtotal</span> <span>${String.format("%.2f", requestScope.total)} $</span>
+                                    <span>Tổng Phụ</span> <span>${String.format("%.2f", requestScope.total)} đ</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-1 small">
-                                    <span>Shipping</span> <span>5 $</span>
+                                    <span>Phí Vận Chuyển</span> <span>5,000 đ</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-1 small">
-                                    <span>Coupon</span> <span class="text-danger">0 $</span>
+                                    <span>Phiếu Giảm Giá</span> <span class="text-danger">0 đ</span>
                                 </div>
                                 <hr>
                                 <div class="d-flex justify-content-between mb-4 small">
-                                    <span>TOTAL</span> <strong class="text-dark">${String.format("%.2f", requestScope.total + 5)} $</strong>
+                                    <span>Tổng Tiền</span> <strong class="text-dark">${String.format("%.2f", requestScope.total + 5)} đ</strong>
                                 </div>
-                                <button class="btn btn-primary w-100 mt-2" type="submit">Place order</button>
+                                <button class="btn btn-primary w-100 mt-2" type="submit">Đặt Hàng</button>
 
                             </div>
                         </div>
