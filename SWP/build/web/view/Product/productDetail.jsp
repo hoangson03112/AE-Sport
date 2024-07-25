@@ -83,7 +83,7 @@
             .btn-pink {
                 background-color: #fcb2b2 !important;
             }
-     
+
         </style>
     </head>
 
@@ -103,7 +103,7 @@
 
             <div class="row  ">
                 <div class="col-6 px-0 ">
-                    <img src="img/product/${requestScope.listImg.get(o).url}" style="width: 600px; height: 600px;" id="largeImage" class="img-thumbnail" alt="...">
+                    <img src="img/product/${requestScope.listImg.get(o).url}" style="width: 670px; height: 700px;" id="largeImage" class="img-thumbnail" alt="...">
                     <div class="row mt-3">
                         <c:forEach var="img" items="${requestScope.listImg}">
                             <div class="col-2 px-0">
@@ -165,7 +165,7 @@
                         <label for="price">Giá bán</label>
                         <h1 class="text-danger w-50 text-center">${productDetail.price}đ</h1>
                         <div class="mt-3">
-                           <button type="submit" class="fs-5 btn btn-danger w-50" value="1" name="action" id="buyNowBtn">Mua Ngay!</button>
+                            <button type="submit" class="fs-5 btn btn-danger w-50" value="1" name="action" id="buyNowBtn">Mua Ngay!</button>
                             <button type="button" onclick="addToCart(${param.productId})" class="fs-4 btn ms-2 bg-body-tertiary text-danger" value="2" name="action" id="addToCartBtn"><i class="bi bi-cart-plus"></i></button>
                         </div>
                     </form>

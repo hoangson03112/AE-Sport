@@ -56,7 +56,9 @@ public class ProductDetail extends HttpServlet {
         String color = request.getParameter("color");
         String number = request.getParameter("number");
 
-         ProductContext productDB = new ProductContext();
+        System.out.println(size);
+
+        ProductContext productDB = new ProductContext();
         product productDetail = productDB.getProduct(Integer.parseInt(productId));
 
         int quantity = Integer.parseInt(request.getParameter("number"));
