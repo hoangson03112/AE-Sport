@@ -192,11 +192,14 @@
                 background-position-x: 95%;
                 background-position-y: center;
             }
+            .m-250{
+                margin-top: 250px;
+            }
         </style>
     </head>
     <body >
         <jsp:include page="HomePage/header.jsp"/>
-        <div class="container m-223">
+        <div class="container m-250">
             <nav aria-label="breadcrumb " >
                 <ol class="breadcrumb m-5 ms-0 transition-1">
                     <li class="breadcrumb-item"><span><i class="bi bi-house-door mx-3"></i></span><a href="HomePage" class="text-decoration-none text-black">Home</a></li>
@@ -254,9 +257,9 @@
                     <div class="col">Tổng Giá</div>
                     <div class="col text-right" id="price-shipping">${String.format("%.2f", requestScope.total + 5)}đ</div>
                 </div>
-                    <c:if test="${requestScope.total != 0}">
-                        <button class="btn" onclick="window.location.href = '${pageContext.request.contextPath}/checkout'">Thanh Toán</button>
-                    </c:if>
+                <c:if test="${requestScope.total != 0}">
+                    <button class="btn" onclick="window.location.href = '${pageContext.request.contextPath}/checkout'">Thanh Toán</button>
+                </c:if>
             </div>
         </div>
     </div>
