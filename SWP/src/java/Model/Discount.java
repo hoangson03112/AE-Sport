@@ -3,18 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+
 import java.sql.*;
+
 /**
  *
  * @author admin
  */
 public class Discount {
+
     private int discount_ID;
     private int discount_Amount;
     private String discount_Name;
     private Date startDate;
     private Date endDate;
-    
 
     public Discount() {
     }
@@ -31,15 +33,14 @@ public class Discount {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    
-    public Discount( int discount_Amount, String discount_Name, Date startDate, Date endDate) {
+
+    public Discount(int discount_Amount, String discount_Name, Date startDate, Date endDate) {
         this.discount_Amount = discount_Amount;
         this.discount_Name = discount_Name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    
     public int getDiscount_ID() {
         return discount_ID;
     }
@@ -80,6 +81,4 @@ public class Discount {
         this.endDate = endDate;
     }
 
-    
-    
 }

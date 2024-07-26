@@ -65,29 +65,6 @@
                         <div class="ms-5"><%= blog.getDetail()%></div>
                     </div>
                     <div class="col-lg-4  px-5">
-
-                        <div class="card mb-4">
-                            <div class="card-header">Tìm Kiếm Bài Viết</div>
-                            <div class="card-body">
-                                <div >
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        placeholder="Tìm Kiếm Bài Viết"
-                                        aria-label="Tìm Kiếm Bài Viết"
-                                        aria-describedby="button-search"
-                                        />
-                                    <button
-                                        class="btn btn-primary float-end my-3"
-                                        id="button-search"
-                                        type="button"
-                                        >
-                                        Tìm!
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="card mb-4 ">
                             <div class="card-header">Doanh Mục</div>
                             <div class="card-body">

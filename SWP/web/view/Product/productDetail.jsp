@@ -8,12 +8,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="productDetail" value="${requestScope.productDetail}" />
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Product</title>
+        <title>Sản Phẩm</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -84,6 +85,45 @@
                 background-color: #fcb2b2 !important;
             }
 
+            .button-view {
+                width: 6.5em;
+                height: 2.3em;
+                margin: 0.5em;
+                background: black;
+                color: white;
+                border: none;
+                border-radius: 0.625em;
+                font-size: 20px;
+                font-weight: bold;
+                cursor: pointer;
+                position: relative;
+                z-index: 1;
+                overflow: hidden;
+            }
+
+            .button-view:hover {
+                color: black;
+            }
+
+            .button-view:after {
+                content: "";
+                background: white;
+                position: absolute;
+                z-index: -1;
+                left: -20%;
+                right: -20%;
+                top: 0;
+                bottom: 0;
+                transform: skewX(-45deg) scale(0, 1);
+                transition: all 0.5s;
+            }
+
+            .button-view:hover:after {
+                transform: skewX(-45deg) scale(1, 1);
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+
         </style>
     </head>
 
@@ -103,7 +143,13 @@
 
             <div class="row  ">
                 <div class="col-6 px-0 ">
-                    <img src="img/product/${requestScope.listImg.get(o).url}" style="width: 670px; height: 700px;" id="largeImage" class="img-thumbnail" alt="...">
+                    <div class="position-relative">
+                        <img src="img/product/${requestScope.listImg.get(o).url}" style="width: 670px; height: 700px;" id="largeImage" class="img-thumbnail " alt="...">
+                        <c:if test="${ productDetail.getStatus() == 'sale'}">
+                            <span  class="  z-1 position-absolute p-3 m-2 rounded-circle text-white bg-danger fs-5  end-0">-${productDetail.getDiscount().getDiscount_Amount()}%</span>
+                        </c:if>
+                    </div>
+
                     <div class="row mt-3">
                         <c:forEach var="img" items="${requestScope.listImg}">
                             <div class="col-2 px-0">
@@ -163,7 +209,23 @@
 
 
                         <label for="price">Giá bán</label>
-                        <h1 class="text-danger w-50 text-center">${productDetail.price}đ</h1>
+                        <!-- Kiểm tra nếu trạng thái sản phẩm không phải là 'sale' -->
+                        <c:if test="${productDetail.status != 'sale'}">
+                            <h1 class="text-danger w-50 text-center">${productDetail.price}đ</h1>
+                        </c:if>
+
+
+                        <c:if test="${productDetail.status == 'sale'}">
+                            <span class=" fs-3 text-decoration-line-through ms-3">      ${productDetail.price}đ</span>
+
+
+                            <h1 class="text-danger w-50 text-center">
+                                ${Math.round((productDetail.price / 100) * (100 - productDetail.discount.discount_Amount))}đ
+                            </h1>
+                        </c:if>
+
+
+
                         <div class="mt-3">
                             <button type="submit" class="fs-5 btn btn-danger w-50" value="1" name="action" id="buyNowBtn">Mua Ngay!</button>
                             <button type="button" onclick="addToCart(${param.productId})" class="fs-4 btn ms-2 bg-body-tertiary text-danger" value="2" name="action" id="addToCartBtn"><i class="bi bi-cart-plus"></i></button>
@@ -281,8 +343,53 @@
                 </div>
             </div>
 
-            <div class="border-start border-5 border-black border-opacity-75 mt-5">
-                <h2 class="w-100 ms-3">SẢN PHẨM LIÊN QUAN</h2>
+            <div class=" my-5">
+                <h2 class="w-100 ms-3 border-start border-5 border-black border-opacity-75 mb-4 ps-2">   SẢN PHẨM LIÊN QUAN</h2>
+                <div class="d-flex justify-content-between mb-3">
+                    <c:forEach items="${requestScope.productsRelated}" var="p">
+                        <c:if test="${param.productId != p.getProductID()}">
+                            <div  class=" bg-body-tertiary  shadow">
+                                <div class="card" style="width: 18rem;">
+                                    <c:if test="${ p.getStatus() == 'sale'}">
+                                        <span  class="  z-1 position-absolute p-2 m-2 rounded-5 text-white bg-danger top-0 end-0 ">-${p.getDiscount().getDiscount_Amount()}%</span>
+                                    </c:if>
+                                    <img src="img/product/${p.getImage().get(0).getUrl()}" class="card-img-top" alt="...">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title text-black" style="height: 3.5rem">
+                                            ${ p.getProductName()}
+                                        </h5>
+
+                                        <c:if test="${ p.getStatus() == 'sale'}">
+                                            <p class="card-text fs-6 text-decoration-line-through my-3 mb-0 text-body-secondary " >
+                                                ${p.getPrice()}đ
+                                            </p>
+                                            <h4 class="text-danger my-2 ">
+                                                ${Math.round((p.getPrice() / 100) * (100-p.getDiscount().getDiscount_Amount()))} đ
+                                            </h4>
+                                        </c:if>
+                                        <c:if test="${ p.getStatus() != 'sale'}">
+                                            <h4 class="text-danger mt-5 ">
+                                                ${p.getPrice()} đ
+                                            </h4>
+                                        </c:if>
+
+                                        <a href="Product?productId=${p.getProductID()}">
+                                            <button class="button-view"> 
+                                                <div class="button-wrapper1 ">
+                                                    <div class="text1  "> MUA!</div>
+                                                </div>
+                                            </button>
+
+                                        </a>
+
+                                    </div>
+                                </div> 
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+
+
             </div>
             <div>   
 

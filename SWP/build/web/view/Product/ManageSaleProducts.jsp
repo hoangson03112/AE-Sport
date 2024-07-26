@@ -371,6 +371,8 @@
                                 <th class="p-4 text-center">Tên Sản Phẩm</th>
                                 <th class="p-4 text-center">Giá </th>
                                 <th class="p-4 text-center">Giảm Giá</th>
+                                <th class="p-4 text-center">Ngày áp dụng</th>
+                                <th class="p-4 text-center">Ngày kết thúc</th>
                                 <th class="p-4 text-center">Số lượng đã bán</th>
                                 <th class="p-4 text-center">Doanh mục</th>
                                 <th class="p-4 text-center"></th>
@@ -386,9 +388,9 @@
                                             ${p.getPrice()}đ
                                         </p>  ${Math.round((p.getPrice() / 100) * (100-p.getDiscount().getDiscount_Amount()))}</td>
                                     <td class="text-center text-warning">${p.discount.discount_Amount}%</td>
-                                    <td class="text-center text-warning">${p.quantity_sold}</td>
-
-
+                                    <td class="text-center ">${p.discount.startDate}</td>
+                                    <td class="text-center ">${p.discount.endDate}</td>
+                                   <td class="text-center text-warning">${p.quantity_sold}</td>
                                     <td class="text-center">
                                         <c:if test="${p != null and p.cate != null and p.cate.type != null}">
                                             <c:if test="${'nam'.equals(p.cate.type)}">
@@ -529,7 +531,7 @@
                                                         <div class="modal-body">
 
                                                             <select  name="discount" required>
-                                                  
+
                                                                 <c:forEach  items="${requestScope.listDiscount}" var="dis">
                                                                     <option  value="${dis.getDiscount_ID()}">${dis.getDiscount_Name()} (${dis.getDiscount_Amount()}%)</option>
                                                                 </c:forEach>

@@ -330,7 +330,7 @@ public class DAOProduct extends DBContext {
         }
         return list;
     }
-    
+
     public List<Product1> searchProducts(String keyword) throws SQLException {
         List<Product1> productList = new ArrayList<>();
 

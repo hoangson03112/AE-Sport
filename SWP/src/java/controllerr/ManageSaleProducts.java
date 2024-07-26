@@ -45,10 +45,6 @@ public class ManageSaleProducts extends HttpServlet {
         String category = request.getParameter("category");
         String Subcategory = request.getParameter("Subcategory");
 
-        request.setAttribute("select1", select1);
-
-        request.setAttribute("category", category);
-        request.setAttribute("Subcategory", Subcategory);
         String type = request.getParameter("type");
 
         if ("2".equals(type)) {
@@ -65,7 +61,10 @@ public class ManageSaleProducts extends HttpServlet {
         }
 
         ArrayList<product> saleProducts = p.getproductsbyStatus("sale");
-
+        
+        request.setAttribute("select1", select1);
+        request.setAttribute("category", category);
+        request.setAttribute("Subcategory", Subcategory);
         request.setAttribute("SaleProducts", saleProducts);
         request.getRequestDispatcher("view/Product/ManageSaleProducts.jsp").forward(request, response);
     }

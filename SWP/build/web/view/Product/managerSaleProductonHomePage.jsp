@@ -340,11 +340,11 @@
                                     alt="..."
                                     />
                                 <div class="card-body">
-                                    <a href="" class="text-decoration-none">
-                                        <h5 class="card-title text-black" style="height: 3.5rem">
-                                            ${ pro.getProductName()}
-                                        </h5></a
-                                    >
+
+                                    <h5 class="card-title text-black" style="height: 3.5rem">
+                                        ${ pro.getProductName()}
+                                    </h5>
+
                                     <p class="card-text fs-6 text-decoration-line-through my-3 mb-0">
                                         ${pro.getPrice()}đ
                                     </p>

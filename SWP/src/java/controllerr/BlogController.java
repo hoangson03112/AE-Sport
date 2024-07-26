@@ -37,6 +37,13 @@ public class BlogController extends HttpServlet {
         request.getRequestDispatcher("view/Blog/BlogList.jsp").forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+              BlogContext blogDB = new BlogContext();
+        System.out.println(req.getParameter("searchBlog"));
+        
+    }
+
     /**
      * Returns a short description of the servlet.
      *

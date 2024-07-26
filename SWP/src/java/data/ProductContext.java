@@ -50,6 +50,8 @@ public class ProductContext extends DBContext.DBContext {
                     Discount d = new Discount();
                     d.setDiscount_ID(rs.getInt("discount_ID"));
                     d.setDiscount_Amount(rs.getInt("discount_amount"));
+                    d.setStartDate(rs.getDate("start_date"));
+                    d.setEndDate(rs.getDate("end_date"));
                     p.setDiscount(d);
                 }
 
@@ -80,6 +82,7 @@ public class ProductContext extends DBContext.DBContext {
                 p.setProductID(rs.getInt("product_ID"));
                 p.setProductName(rs.getString("product_Name"));
                 p.setPrice(rs.getInt("price"));
+                p.setStatus(rs.getString("status"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity_sold(rs.getInt("quantity_sold"));
                 Discount d = new Discount();
@@ -160,7 +163,6 @@ public class ProductContext extends DBContext.DBContext {
 
     public ArrayList<product> getproductsbyStatus(String status) {
         ArrayList<product> list = new ArrayList<>();
-        ImgContext imgDB = new ImgContext();
         try {
             String sqlString = "SELECT *\n"
                     + "                FROM [dbo].[Product] p      \n"
@@ -197,6 +199,8 @@ public class ProductContext extends DBContext.DBContext {
                     Discount d = new Discount();
                     d.setDiscount_ID(rs.getInt("discount_ID"));
                     d.setDiscount_Amount(rs.getInt("discount_amount"));
+                    d.setStartDate(rs.getDate("start_date"));
+                    d.setEndDate(rs.getDate("end_date"));
                     p.setDiscount(d);
                 }
 
@@ -242,6 +246,8 @@ public class ProductContext extends DBContext.DBContext {
                 Discount d = new Discount();
                 d.setDiscount_ID(rs.getInt("discount_ID"));
                 d.setDiscount_Amount(rs.getInt("discount_amount"));
+                d.setStartDate(rs.getDate("start_date"));
+                d.setEndDate(rs.getDate("end_date"));
                 p.setDiscount(d);
                 list.add(p);
             }
@@ -366,4 +372,51 @@ public class ProductContext extends DBContext.DBContext {
         return list;
     }
 
+    public ArrayList<product> getProductsbySubcategory(int subcategoryID) {
+        ArrayList<product> list = new ArrayList<>();
+        ImgContext imgDB = new ImgContext();
+        String sql = "SELECT DISTINCT p.product_ID, "
+                + "       p.product_name, "
+                + "       p.price, "
+                + "       p.discount_ID, "
+                + "       d.discount_amount, "
+                + "       d.discount_Name, "
+                + "       d.start_date, "
+                + "       d.end_date, "
+                + "       p.description,"
+                + "         p.status "
+                + "FROM Product p "
+                + "JOIN ImgProduct ip ON p.product_ID = ip.product_ID "
+                + "LEFT JOIN Discount d ON d.discount_ID = p.discount_ID "
+                + "WHERE p.Subcategory_ID = ?";
+
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, subcategoryID);
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    product product = new product();
+                    product.setProductID(rs.getInt("product_ID"));
+                    product.setProductName(rs.getString("product_name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setStatus(rs.getString("status"));
+                    ArrayList<img> listImg = imgDB.getImgsofProduct(rs.getInt("product_ID"));
+                    product.setImage(listImg);
+
+                    product.setDescription(rs.getString("description"));
+
+                    Discount d = new Discount();
+                    d.setDiscount_ID(rs.getInt("discount_ID"));
+                    d.setDiscount_Amount(rs.getInt("discount_amount"));
+                    d.setStartDate(rs.getDate("start_date"));
+                    d.setEndDate(rs.getDate("end_date"));
+                    product.setDiscount(d);
+                    list.add(product);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 }

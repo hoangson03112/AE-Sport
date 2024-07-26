@@ -1,8 +1,10 @@
 package controllerr;
 
 import DBContext.DAOFeedback;
+import DBContext.DAOProduct;
 import Model.Color;
 import Model.Feedback;
+import Model.Product1;
 import Model.Size;
 import data.ImgContext;
 import data.ProductContext;
@@ -26,6 +28,7 @@ public class ProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String productId = request.getParameter("productId");
         ProductContext productDB = new ProductContext();
         ImgContext imgDB = new ImgContext();
@@ -34,11 +37,11 @@ public class ProductDetail extends HttpServlet {
         ArrayList<Size> listSize = productDB.getSizebyProductId(Integer.parseInt(productId));
         ArrayList<img> listImg = imgDB.getImgsofProduct(Integer.parseInt(productId));
         ArrayList<Color> listColor = productDB.getColorbyProductId(Integer.parseInt(productId));
-
         List<Feedback> listbyproID = daofb.getFeedbackByProductId(Integer.parseInt(productId));
+        ArrayList<product> productsRelated = productDB.getProductsbySubcategory(productDetail.getSubCate().getSubcategory_ID());
 
+        request.setAttribute("productsRelated", productsRelated);
         request.setAttribute("listbyproID", listbyproID);
-        System.out.println(listColor);
         request.setAttribute("listSize", listSize);
         request.setAttribute("listImg", listImg);
         request.setAttribute("listColor", listColor);
