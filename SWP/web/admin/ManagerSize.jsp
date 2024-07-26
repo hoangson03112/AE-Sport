@@ -125,7 +125,7 @@
                             <th>SizeID</th>
                             <th>SizeType</th>
                             <th>SizeName</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Size s : list) {

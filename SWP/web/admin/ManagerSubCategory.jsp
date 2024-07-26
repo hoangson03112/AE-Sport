@@ -126,7 +126,7 @@
                             <th>SubCategoryID</th>
                             <th>SubCategoryName</th>
                             <th>CategoryType</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (SubCategory c : list) {

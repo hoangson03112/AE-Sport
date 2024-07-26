@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,8 +34,10 @@
             
             <div class="admin-page col-8"><i class="bi bi-gear"> </i>Administrator Page</div>
             <div class="user-info col-2 d-flex justify-content-center ">
-                <img src="img/mu.jpg" alt="User Profile Picture">
-                <div>Quang Huy</div>
+                
+                <c:if test="${sessionScope.CRRAccount != null}">
+                    <i style="margin-right: 8px" class="bi bi-person-circle"></i><a href="view/ViewProfile.jsp" class="font-monospace text-black fs-7"> ${sessionScope.CRRAccount.getFull_Name()}</a>
+                </c:if>
             </div>
         </div>
     </body>

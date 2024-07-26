@@ -4,6 +4,8 @@
     Author     : admin
 --%>
 
+<%@page import="Model.UserRole"%>
+<%@page import="DBContext.AdminDAO"%>
 <%@page import="Model.Role"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,28 +41,30 @@
             <div class="col-10" style="background: #e2e7e8">
                 <jsp:include page="HeaderAdmin.jsp"/>
 
-                <div style="margin: 30px; background: white;padding: 20px;border-radius: 10px" >
-                    <h1 style="font-family: initial">Update Role for Account ID: <%= request.getAttribute("uID")%></h1>
+                <div style="margin: 30px; background: white;padding: 20px;border-radius: 10px">
+                    <h1 style="font-family: initial">Update Role for Account ID: <%= request.getParameter("uID")%></h1>
                     <%
                         ArrayList<Role> list = (ArrayList<Role>) request.getAttribute("list");
+                        int RoleID = -1;
+                        if (request.getParameter("uID") != null) {
+                            int uID = Integer.parseInt(request.getParameter("uID"));
+                            AdminDAO dao = new AdminDAO();
+                            RoleID = dao.getUserRoleByUserID(uID).getRoleID();
+                        }
                     %>
                     <form action="updateaccount" method="post" style="font-weight: bold">
-                        <input value="<%= request.getAttribute("uID")%>" name="uID" type="hidden"/>
+                        <input value="<%= request.getParameter("uID")%>" name="uID" type="hidden"/>
                         <%
                             if (list != null) {
                                 for (Role item : list) {
                         %>
                         <div>
-                            <input type="radio" name="role" value="<%= item.getRoleID() %>"">
-                            <label for="<%= item.getRoleID() %>"><%= item.getRoleName() %></label>
+                            <input type="radio" name="role" value="<%= item.getRoleID()%>"
+                                   <%= (item.getRoleID() == RoleID) ? "checked" : ""%> >
+                            <label for="<%= item.getRoleID()%>"><%= item.getRoleName()%></label>
                         </div>
                         <%
                             }
-                        %>
-                        <div>
-                            <input type="radio" name="role" value="user""> user
-                        </div>
-                        <%
                         } else {
                         %>
                         <p>No roles available to update.</p>
@@ -70,7 +74,6 @@
                         <input type="submit" value="Update Roles">
                     </form>
                 </div>
-
             </div>
     </body>
 </html>

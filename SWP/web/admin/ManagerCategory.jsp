@@ -147,7 +147,7 @@
                             <th>CategoryID</th>
                             <th>CategoryName</th>
                             <th>CategoryType</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Category c : list) {

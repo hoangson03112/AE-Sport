@@ -116,7 +116,7 @@
                             <th>SportID</th>
                             <th>SportName</th>
                             <th>CLBName</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (sport s : list) {

@@ -102,8 +102,8 @@
                         <tr>
                             <th>FeatureID</th>
                             <th>FeatureName</th>
-                            <th>Đường dẫn</th>
-                            <th>Thao Tác</th>
+                            <th>Path</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Feature f : list) {

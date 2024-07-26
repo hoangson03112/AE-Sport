@@ -158,7 +158,7 @@
                             <th>UnitPrice</th>
                             <th>Discount</th>
                             <th>Quantity</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Product p : list) {

@@ -115,7 +115,7 @@
                         <tr>
                             <th>FeatureID</th>
                             <th>FeatureName</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Brand f : list) {

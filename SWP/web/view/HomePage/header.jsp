@@ -158,7 +158,6 @@
                     </button>
                     <div class="collapse navbar-collapse col-10 align-items-center row" id="navbarNav">
                         <ul class="col-9 navbar-nav nav fs-5 align-items-center d-flex justify-content-center">
-
                             <li class="nav-item mx-5 dropdown py-3">
                                 <a class="text-decoration-none text-black" role="button" id="navbarDropdownMale" data-bs-popper="static" aria-expanded="false" href="#">NAM</a>
                                 <ul class="dropdown-menu transition-2 dropdown-sub dropdown-menu-end" aria-labelledby="navbarDropdownMale"> 
@@ -169,7 +168,7 @@
                                             if (!listSubcate.isEmpty()) {%>
                                         <ul class="dropdown-menu dropdown-submenu-menu" aria-labelledby="subnavbarDropdown<%=cate.getCategory_ID()%>">
                                             <%for (SubCategory subCate : listSubcate) {%>
-                                            <li><a class="dropdown-item" href="#"><%=subCate.getSubcategory_Name()%></a></li>
+                                            <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%=subCate.getSubcategory_ID()%>"><%=subCate.getSubcategory_Name()%></a></li>
                                                 <%}%>
                                         </ul>
                                         <%  } %>
@@ -188,7 +187,7 @@
                                             if (!listSubcate.isEmpty()) {%>
                                         <ul class="dropdown-menu dropdown-submenu-menu" aria-labelledby="subnavbarDropdown<%=cate.getCategory_ID()%>">
                                             <%for (SubCategory subCate : listSubcate) {%>
-                                            <li><a class="dropdown-item" href="#"><%=subCate.getSubcategory_Name()%></a></li>
+                                            <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%=subCate.getSubcategory_ID()%>"><%=subCate.getSubcategory_Name()%></a></li>
                                                 <% } %>
                                         </ul>
                                         <%   } %>
@@ -201,7 +200,7 @@
                                 <a class="text-decoration-none text-black" role="button" data-bs-popper="static" aria-expanded="false" href="#">MÔN THỂ THAO</a>
                                 <ul class="dropdown-menu transition-3 fs-5" aria-labelledby="navbarDropdown">
                                     <% for (sport sport : sports) {%>
-                                    <li><a class="dropdown-item" href="#"><%= sport.getSport_Name()%></a></li>
+                                    <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%= sport.getSport_Id()%>"><%= sport.getSport_Name()%></a></li>
                                         <% } %>
                                 </ul>
                             </li>
@@ -209,7 +208,7 @@
                                 <a class="text-decoration-none text-black" role="button" data-bs-toggle="static" aria-expanded="false">THƯƠNG HIỆU</a>
                                 <ul class="dropdown-menu transition-4 fs-5">
                                     <% for (Brand b : brands) {%>
-                                    <li><a class="dropdown-item" href="#"><%=b.getName()%></a></li>
+                                    <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%=b.getId()%>"><%=b.getName()%></a></li>
                                         <% }%>
                                 </ul>
                             </li>
@@ -231,7 +230,7 @@
                             <span class="bg-white border-end-0 pe-0" id="search-icon"><i class="bi bi-search"></i></span>
                             <input type="text" class="form-control border-0 form-control" placeholder="Tìm Kiếm Sản Phẩm" aria-label="Search" aria-describedby="search-icon" />
                         </div>
-                                        <a href="<%=request.getContextPath()%>/CartPage" class="col-1 fs-2 text-danger">
+                        <a href="<%=request.getContextPath()%>/CartPage" class="col-1 fs-2 text-danger">
                             <i class="bi bi-cart">
                                  <!--<span class="position-absolute mt-3 translate-middle badge rounded-pill bg-danger fs-10"><%=count%></span>-->
                                 <span id="cart-size" class="position-absolute mt-3 translate-middle badge rounded-pill bg-danger fs-10">${sessionScope.cart.size()}</span>

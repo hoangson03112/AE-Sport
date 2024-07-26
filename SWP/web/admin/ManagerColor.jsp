@@ -118,7 +118,7 @@
                             <th>ColorID</th>
                             <th>ColorName</th>
                             <th>ColorCode</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Color c : list) {

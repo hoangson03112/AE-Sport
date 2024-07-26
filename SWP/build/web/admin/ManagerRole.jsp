@@ -94,7 +94,7 @@
                         <tr>
                             <th>RoleID</th>
                             <th>RoleName</th>
-                            <th>Thao Tác</th>
+                            <th>Operation</th>
                         </tr>
                         <%
                             for (Role r : list) {

@@ -86,14 +86,9 @@
                                     Email: <input type="email" name="email" value="<%=u.getEmail()%>" required/><br/><h5 style="color: red">${error2}</h5>
                                 </div>
                                 Phone: <input type="text" name="phone" value="<%=u.getPhone_number()%>" required/><br/><br/>
-                                <%
-                                for (int idx = 0; idx < adrList.size(); idx++) {
-                                    Address elem = adrList.get(idx);
-                                %>
-                                Address<%=idx+1%>: <input type="text" name="address" value="<%=elem.getAddress()%>" required/><br/><br/>
-                                <%
-                                }
-                                %>
+                                
+                                Address: <input type="text" name="address" value="<%=u.getAddress()%>" required/><br/><br/>
+                                
                             </div>
 
                             <div style="display: flex;">

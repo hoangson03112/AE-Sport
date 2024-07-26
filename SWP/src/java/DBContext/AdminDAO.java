@@ -110,8 +110,6 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-    
-    
 
     // lấy ra 1 product theo tên
     public Product getProductByName(String name) {
@@ -799,6 +797,18 @@ public class AdminDAO extends DBContext {
             throw e;
         }
     }
+    
+    // xóa 1 Discount khi hết thời hạn
+    public void deleteExpiredDiscounts() throws Exception {
+    try {
+        String sql = "DELETE FROM [Discount] WHERE [end_date] < GETDATE()";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.executeUpdate();
+    } catch (Exception e) {
+        throw e;
+    }
+}
+
 
 // SPORT =====================================================================================================================================
     // Lấy ra tất cả môn thể thao của hệ thống
@@ -1312,16 +1322,11 @@ public class AdminDAO extends DBContext {
     // Lấy ra tất cả tài khoản người dùng
     public ArrayList<UserAccount> getAllUserAccount() {
         ArrayList<UserAccount> list = new ArrayList<>();
-        String sql = "SELECT \n"
-                + "    UA.*\n"
-                + "FROM \n"
-                + "    [SWP].[dbo].[UserAccounts] UA\n"
-                + "LEFT JOIN \n"
-                + "    [SWP].[dbo].[UserRole] UR\n"
-                + "ON \n"
-                + "    UA.[user_ID] = UR.[user_ID]\n"
-                + "WHERE \n"
-                + "    UR.[user_ID] IS NULL;";
+        String sql = "SELECT UA.*\n"
+                + "FROM [SWP].[dbo].[UserAccounts] UA\n"
+                + "LEFT JOIN [SWP].[dbo].[UserRole] UR\n"
+                + "ON UA.[user_ID] = UR.[user_ID]\n"
+                + "WHERE  UR.[role_ID] = 6;";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -1349,14 +1354,10 @@ public class AdminDAO extends DBContext {
     public ArrayList<EmployeeAccount> getAllEmployeeAccount() {
         ArrayList<EmployeeAccount> list = new ArrayList<>();
         String sql = "SELECT UR.role_ID, UA.*\n"
-                + "FROM \n"
-                + "[SWP].[dbo].[UserAccounts] UA\n"
-                + "LEFT JOIN \n"
-                + "[SWP].[dbo].[UserRole] UR\n"
-                + "ON \n"
-                + "  UA.[user_ID] = UR.[user_ID]\n"
-                + "WHERE \n"
-                + "  UR.[user_ID] IS NOT NULL;";
+                + "FROM [SWP].[dbo].[UserAccounts] UA\n"
+                + "LEFT JOIN [SWP].[dbo].[UserRole] UR\n"
+                + "ON UA.[user_ID] = UR.[user_ID]\n"
+                + "WHERE UR.[role_ID] != 6;";  // roleID:6 = user
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -1531,9 +1532,9 @@ public class AdminDAO extends DBContext {
     }
 
     // Chỉnh sửa người dùng khi có đối 1 tượng UserAccount
-    public void updateUserAccount(UserAccount u) {
+    public void updateUserAccount(UserAccount u, String address) {
         try {
-            String sql = " UPDATE [UserAccounts] SET [password_hash] = ?, [username] = ?,[full_name] = ?,[email] = ?,[phone_number] = ?,[img] = ? WHERE [user_ID] = ?";
+            String sql = " UPDATE [UserAccounts] SET [password_hash] = ?, [username] = ?,[full_name] = ?,[email] = ?,[phone_number] = ?,[img] = ?,[address] = ? WHERE [user_ID] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setString(1, u.getPassword());
@@ -1542,7 +1543,8 @@ public class AdminDAO extends DBContext {
             st.setString(4, u.getEmail());
             st.setString(5, u.getPhone_number());
             st.setString(6, u.getImg());
-            st.setInt(7, u.getUse_ID());
+            st.setString(7, address);
+            st.setInt(8, u.getUse_ID());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -1628,9 +1630,9 @@ public class AdminDAO extends DBContext {
     }
 
     // thêm 1 tài khoản người dùng
-    public void insertUserAccount(UserAccount u) {
+    public void insertUserAccount(UserAccount u, String address) {
         try {
-            String sql = "insert into [UserAccounts]([password_hash],[username],[full_name],[email],[phone_number],[img],[status],[dateCreate]) values(?,?,?,?,?,?,?,?)";
+            String sql = "insert into [UserAccounts]([password_hash],[username],[full_name],[email],[phone_number],[img],[status],[dateCreate],[address]) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setString(1, u.getPassword());
@@ -1641,25 +1643,26 @@ public class AdminDAO extends DBContext {
             st.setString(6, u.getImg());
             st.setString(7, u.getStatus());
             st.setDate(8, u.getDateCreate());
+            st.setString(9, address);
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    // thêm 1 tài khoản người dùng
-    public void insertAddressUserAccount(String address, int user_ID) {
-        try {
-            String sql = "insert into [Address]([address],[user_ID]) values(?,?)";
-            PreparedStatement st = connection.prepareStatement(sql);
-
-            st.setString(1, address);
-            st.setInt(2, user_ID);
-            st.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    // thêm 1 địa chỉ tài khoản người dùng
+//    public void insertAddressUserAccount(String address, int user_ID) {
+//        try {
+//            String sql = "insert into [UserAccounts]([address],[user_ID]) values(?,?)";
+//            PreparedStatement st = connection.prepareStatement(sql);
+//
+//            st.setString(1, address);
+//            st.setInt(2, user_ID);
+//            st.executeUpdate();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 
     // getLastInsertedUserAccountId()
     public int getLastInsertedUserAccountId() {
