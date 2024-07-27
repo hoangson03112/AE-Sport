@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
             if ("active".equals(U.getStatus())) {
                 request.getSession().setAttribute("CRRAccount", U);
                 if ("admin".equals(AuthorizationDB.getRole(U.getUse_ID()))) {
-                    response.sendRedirect("manageruseraccount");
+                    response.sendRedirect("report?action=registrationReport");
                 }
                 if ("user".equals(AuthorizationDB.getRole(U.getUse_ID()))) {
                     response.sendRedirect("HomePage");
@@ -109,22 +109,6 @@ public class LoginController extends HttpServlet {
 
         request.setAttribute("message", message);
         request.getRequestDispatcher("view/Register.jsp").forward(request, response);
-    }
-
-    private void ForgetPasswork(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        AccountDAO ADAO = new AccountDAO();
-
-        String emailForgot = request.getParameter("userEmail");
-        int newAccID = ADAO.GetAccountByEmail(emailForgot);
-        if (newAccID != 0) {
-            // gửi email tới địa chỉ mail vừa được đăng ký
-            String bodyMail = "Click this link to reset your account: http://localhost:8080/SWP/Account?Action=RQResetPassword&AccountId=" + newAccID;
-            Email.sendEmail(emailForgot, "Request To Reset your account password", bodyMail);
-            response.getWriter().write("Please check your mail to get token reset!!");
-            return;
-        }
-        response.getWriter().write("Incorrect, Your Email not existed");
     }
 
     @Override

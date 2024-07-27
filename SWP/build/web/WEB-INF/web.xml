@@ -224,7 +224,7 @@
         <servlet-name>DeleteItem</servlet-name>
         <servlet-class>controllerr.DeleteItemController</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>Cart</servlet-name>
         <servlet-class>controllerr.CartController</servlet-class>
     </servlet>
@@ -232,11 +232,23 @@
         <servlet-name>Checkout</servlet-name>
         <servlet-class>controllerr.CheckoutController</servlet-class>
     </servlet>
-      <servlet-mapping>
+    <servlet>
+        <servlet-name>ForgotPass</servlet-name>
+        <servlet-class>controllerr.ForgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductByBrand</servlet-name>
+        <servlet-class>controllerr.ProductByBrand</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductBySport</servlet-name>
+        <servlet-class>controllerr.ProductBySport</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>CartCheckout</servlet-name>
         <url-pattern>/cart-change</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/CartPage</url-pattern>
     </servlet-mapping>
@@ -463,6 +475,18 @@
     <servlet-mapping>
         <servlet-name>ReportProductController</servlet-name>
         <url-pattern>/reportProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPass</servlet-name>
+        <url-pattern>/ForgotPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductByBrand</servlet-name>
+        <url-pattern>/brand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductBySport</servlet-name>
+        <url-pattern>/sport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

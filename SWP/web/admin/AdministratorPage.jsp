@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@page import="data.BlogContext"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,6 +37,11 @@
                 cursor: pointer;
             }
         </style>
+        <%
+     BlogContext blogDB = new BlogContext();
+     int numberRequestAdd = blogDB.getNumberRequest("add");
+     int numberRequestDelete = blogDB.getNumberRequest("delete");
+        %>
     </head>
     <body>
         <div class="sidebar">
@@ -44,6 +49,15 @@
                 <a href="${pageContext.request.contextPath}/HomePage">
                     <i class="bi bi-house-fill" style="padding-right: 7px"></i>Home
                 </a>
+            </div>
+            <div class="menu-item flex-column" onclick="toggleSubmenu(this)">
+                <a><i class="bi bi-clipboard2-data-fill" style="padding-right: 7px"></i> Báo cáo</a>
+
+                <ul style="" class="submenu">
+                    <li class="submenu-item"><a style="width: 120%" href="${pageContext.request.contextPath}/report?action=registrationReport"><i class="bi bi-clipboard-pulse" style="padding-right: 7px"></i>Báo cáo đăng kí</a></li>
+                    <li class="submenu-item"><a style="width: 120%" href="${pageContext.request.contextPath}/reportProduct"><i class="bi bi-archive-fill" style="padding-right: 7px" ></i>Báo cáo sản phẩm</a></li>
+                    <li class="submenu-item"><a style="width: 120%" href="${pageContext.request.contextPath}/salesReport"><i class="bi bi-box-seam-fill" style="padding-right: 7px"></i>Doanh thu và đơn hàng</a></li>                
+                </ul>
             </div>
             <div class="menu-item">
                 <a href="${pageContext.request.contextPath}/manageruseraccount">
@@ -65,6 +79,31 @@
                     <i class="bi bi-arrow-left-right" style="padding-right: 7px"></i> Quản Lý Chức Năng
                 </a>
             </div>
+            <div class="menu-item flex-column" onclick="toggleSubmenu(this)">
+                <a><i class="bi bi-envelope" style="padding-right: 7px"></i> Yêu Cầu Tin Tức</a>
+
+                <ul style="" class="submenu">
+                    <li class="submenu-item position-relative">
+                        <a style="width: 120%" href="${pageContext.request.contextPath}/RequestsBlog?mode=1"><i class="bi bi-file-earmark-diff" style="padding-right: 7px"></i>Thêm</a>
+                        <span
+                            class=" position-absolute badge top-0 start-50  rounded bg-danger me-4  fs-7"
+                            >
+                            <%=numberRequestAdd %>
+                        </span>
+
+                    </li>
+                    <li class="submenu-item position-relative"><a style="width: 120%" href="${pageContext.request.contextPath}/RequestsBlog?mode=2"><i class="bi bi-file-earmark-diff" style="padding-right: 7px" ></i>XÓa</a>
+                        <span
+                            class=" position-absolute  badge top-0 start-50 rounded bg-danger me-4  fs-7"
+                            >
+                            <%=numberRequestDelete %>
+                        </span>
+
+
+
+                    </li>
+                </ul>
+            </div>
 
             <div class="menu-item flex-column" onclick="toggleSubmenu(this)">
                 <a><i class="bi bi-border-width" style="padding-right: 7px"></i> Sản Phẩm</a>
@@ -79,6 +118,18 @@
                     <li class="submenu-item"><a style="width: 120%" href="${pageContext.request.contextPath}/managercategory"><i class="bi bi-journals" style="padding-right: 7px" ></i>Danh Sách Danh Mục</a></li>
                     <li class="submenu-item"><a style="width: 120%" href="${pageContext.request.contextPath}/managersubcategory"><i class="bi bi-journal" style="padding-right: 7px" ></i>Danh Sách Thể Loại</a></li>                 
                 </ul>
+            </div>
+
+            <div class="menu-item">
+                <a href="${pageContext.request.contextPath}/Setting">
+                    <i class="bi bi-person-gear" style="padding-right: 7px"></i> Cài Đặt TRang chủ
+                </a>    
+            </div>
+
+            <div class="menu-item">
+                <a href="${pageContext.request.contextPath}/Order?action=list">
+                    <i class="bi bi-boxes" style="padding-right: 7px"></i> Quản Lý Đơn Hàng
+                </a>
             </div>
         </div>
 

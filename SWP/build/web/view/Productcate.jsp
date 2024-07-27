@@ -168,7 +168,38 @@
         <header class=" m-200 py-5 bg-light border-bottom mb-4">
 
             <div class="text-center my-3">
-                <h1 class="fw-bolder">TẤT CẢ SẢN PHẨM</h1>
+                <h1 class="fw-bolder">
+                    <c:set var="found" value="false"/>
+
+                    <!-- First foreach -->
+                    <c:forEach items="${listsub}" var="o">
+                        <c:if test="${param.Subcategory_ID == o.subcategory_ID}">
+                            ${o.subcategory_Name}
+                            <c:set var="found" value="true"/>
+                        </c:if>
+                    </c:forEach>
+
+                    <!-- Second foreach -->
+                    <c:forEach items="${listsport}" var="o">
+                        <c:if test="${param.sport_Id == o.sport_Id}">
+                            ${o.sport_Name}
+                            <c:set var="found" value="true"/>
+                        </c:if>
+                    </c:forEach>
+
+                    <!-- Third foreach -->
+                    <c:forEach items="${listbrand}" var="o">
+                        <c:if test="${param.id == o.id}">
+                            ${o.name}/-strong/-heart:>:o:-((:-h<c:set var="found" value="true"/>
+                        </c:if>
+                    </c:forEach>
+
+                    <!-- Check if nothing was found -->
+                    <c:if test="${not found}">
+                        Tất Cả Sản Phẩm
+                    </c:if>
+
+                </h1>
             </div>
 
         </header>
@@ -200,6 +231,7 @@
                                         ${o.subcategory_Name}
                                     </a>
                                 </li>
+
                             </c:forEach>
                         </ul>
 
@@ -220,8 +252,7 @@
                             </c:forEach>
                         </div>
                     </div>
-                </div>
-                <div class="col-9">
+                </div>/-strong/-heart:>:o:-((:-h<div class="col-9">
                     <div class="row mb-3">
                         <div class="col-md-8">
                             <form method="GET" action="productList" class="form-inline" id="buttonForm">
@@ -261,8 +292,7 @@
                                     <a href="Product?productId=${prd.productID}" class="text-white">
                                         <div class="button-wrapper">
                                             <div class="text">Chi Tiết!</div>
-                                            <span class="icon fs-6">
-                                                <i class="bi bi-bag-plus"></i>
+                                            <span class="icon fs-6">/-strong/-heart:>:o:-((:-h<i class="bi bi-bag-plus"></i>
                                             </span>
                                         </div>
                                     </a>

@@ -59,7 +59,7 @@ public class ReportController extends HttpServlet {
             throws ServletException, IOException {
         Map<String, Integer> report = dao.getAllUserRegistrationReport();
         request.setAttribute("registrationReport", report);
-        request.getRequestDispatcher("/report/registrationReport.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/registrationReport.jsp").forward(request, response);
     }
 
     

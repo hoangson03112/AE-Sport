@@ -57,6 +57,7 @@ public class AccountController extends HttpServlet {
     private void ResetPassword(HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
         int AccountId = Integer.parseInt(request.getParameter("AccountId"));
         String newPass = request.getParameter("NewPass");
+        System.out.println(newPass);
         AccountDAO ao = new AccountDAO();
         ao.updateUserAccount(newPass, AccountId);
         request.setAttribute("AccountId", "Your account was activated");

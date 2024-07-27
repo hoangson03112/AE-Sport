@@ -399,6 +399,24 @@
             .text-button:focus {
                 outline: none; /* Loại bỏ viền focus */
             }
+
+
+
+            .password-input {
+                position: relative;
+                margin-bottom: 1rem;
+            }
+            .password-input input {
+                width: 100%;
+                padding-right: 40px; /* Để chừa chỗ cho nút */
+            }
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 65%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
         </style>
 
 
@@ -433,19 +451,18 @@
                         <h3 class="subtitle">Chào mừng trở lại! Vui lòng đăng nhập.</h3>
                         <div class="email-input">
                             <span class="input-title">Tài khoản</span>
-                            <input class="input" id="username" type="text" placeholder="Tài khoản" name="username" required/>
+                            <input class="input" id="username" type="text" placeholder="Tài khoản" name="username" required />
                         </div>
                         <div class="password-input">
                             <span class="input-title">Mật Khẩu</span>
-                            <input class="input" id="password" type="password" name="password" placeholder="********" required/>
+                            <div class="password-wrapper">
+                                <input class="input" id="password" type="password" name="password" placeholder="********" required />
+                                <span class="toggle-password" id="togglePassword1">👁️</span>
+                            </div>
                         </div>
                         <div class="recovery">
-                            <div class="remember">
-                                <input type="checkbox" id="check" />
-                                <label for="check">Nhớ mật khẩu</label>
-                            </div>
                             <div class="forgot">
-                                <button type="button" class="text-button" id="forgotPasswordButton">Quên mật khẩu</button>
+                                <button type="button" class="text-button" id="forgotPasswordButton" onclick="window.location.href = 'http://localhost:9999/SWP/ForgotPass'">Quên mật khẩu     </button>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit" name="action" value="login">Đăng nhập</button>
@@ -488,12 +505,20 @@
         </c:if>
 
         <script>
-            document.getElementById('forgotPasswordButton').addEventListener('click', function () {
-                var form = document.getElementById('loginForm');
-                form.action = 'Login'; // Cập nhật URL hành động cho quên mật khẩu
-                form.submit(); // Gửi biểu mẫu với hành động mới
+            document.getElementById('togglePassword1').addEventListener('click', function () {
+                var passwordField = document.getElementById('password');
+                var type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈'; // Thay đổi biểu tượng
+            });
+            document.getElementById('togglePassword2').addEventListener('click', function () {
+                var confirmPasswordField = document.getElementById('confirm-password');
+                var type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordField.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈'; // Thay đổi biểu tượng
             });
         </script>
+
 
     </body>
 </html>

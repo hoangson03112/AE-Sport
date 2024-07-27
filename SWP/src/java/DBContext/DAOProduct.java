@@ -7,6 +7,8 @@ package DBContext;
 import Model.Product;
 import Model.Product1;
 import Model.SubCategory;
+import entity.Brand;
+import entity.sport;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -360,4 +362,97 @@ public class DAOProduct extends DBContext {
         }
         return productList;
     }
+
+    public List<Product1> getbysport(int Sport_ID) {
+        List<Product1> list = new ArrayList<>();
+        try {
+            String sql = "select * from Product\n"
+                    + "JOIN ImgProduct ON Product.product_ID = ImgProduct.product_ID\n"
+                    + "where Product.Sport_ID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, Sport_ID);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product1 product = new Product1();
+                product.setSportID(rs.getInt("Sport_ID"));
+                product.setProductID(rs.getInt("product_ID"));
+                product.setPrice(rs.getDouble("price"));
+                product.setImg(rs.getString("img_url"));
+                product.setDescription(rs.getString("description"));
+                product.setProductName(rs.getString("product_Name"));
+                product.setStatus(rs.getString("status"));
+                // Set other fields as necessary
+                list.add(product);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+
+    public List<Product1> getbybrand(int brand_ID) {
+        List<Product1> list = new ArrayList<>();
+        try {
+            String sql = "select * from Product\n"
+                    + "JOIN ImgProduct ON Product.product_ID = ImgProduct.product_ID\n"
+                    + "where Product.brand_ID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, brand_ID);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product1 product = new Product1();
+                product.setBrandID(rs.getInt("brand_ID"));
+                product.setProductID(rs.getInt("product_ID"));
+                product.setPrice(rs.getDouble("price"));
+                product.setImg(rs.getString("img_url"));
+                product.setDescription(rs.getString("description"));
+                product.setProductName(rs.getString("product_Name"));
+                product.setStatus(rs.getString("status"));
+                // Set other fields as necessary
+                list.add(product);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+
+    public List<sport> getAllsport() {
+        List<sport> sport = new ArrayList<>();
+        try {
+            String sql = "select * from Sport";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                sport product = new sport();
+                product.setSport_Id(rs.getInt("Sport_ID"));
+                product.setSport_Name(rs.getString("Sport_Name"));
+
+                sport.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sport;
+    }
+
+    public List<Brand> getAllbrand() {
+        List<Brand> Brand = new ArrayList<>();
+        try {
+            String sql = "select * from brand";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Brand product = new Brand();
+                product.setId(rs.getInt("Brand_ID"));
+                product.setName(rs.getString("Brand_Name"));
+
+                Brand.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Brand;
+    }
+
 }

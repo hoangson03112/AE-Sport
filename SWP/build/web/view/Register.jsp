@@ -439,14 +439,15 @@
 
                         <div class="password-input">
                             <span class="input-title">Mật Khẩu</span>
-                            <input class="input" id="password" type="password" name="password" placeholder="********" required/>
+                            <input class="input" id="password" type="password" name="password" placeholder="********"            pattern="^(?=.*[A-Z]).{8,}$" 
+                                   title="Password must be at least 8 characters long and contain at least one uppercase letter." 
+                                   required />
                             <span class="toggle-password" id="togglePassword1">👁️</span>
-
                         </div>
 
                         <div class="password-input">
                             <span class="input-title">Nhập lại mật khẩu</span>
-                            <input class="input" id="confirm-password" type="password" name="confirm-password" placeholder="********" required/>
+                            <input class="input" id="confirm-password" type="password" name="confirm-password" placeholder="********" required />
                             <span class="toggle-password" id="togglePassword2">👁️</span>
                         </div>
 

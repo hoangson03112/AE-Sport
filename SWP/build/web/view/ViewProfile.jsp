@@ -4,6 +4,7 @@
         background:#f8f8f8
     }
 </style>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <div class="row flex-lg-nowrap">
@@ -11,9 +12,7 @@
             <div class="card p-3">
                 <div class="e-navlist e-navlist--active-bg">
                     <ul class="nav">
-                        <li class="nav-item"><a class="nav-link px-2 active" href="../Order?action=myOrder"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>My Order</span></a></li>
-                        <li class="nav-item"><a class="nav-link px-2 active" href="../Order?action=list"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Order List</span></a></li>
-                        <li class="nav-item"><a class="nav-link px-2" href="${pageContext.request.contextPath}/report?action=registrationReport" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Report</span></a></li>
+                        <li class="nav-item"><a class="nav-link px-2 active" href="../Order?action=myOrder"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Đơn Hàng ____Của Tôi</span></a></li>
                     </ul>
                 </div>
             </div>

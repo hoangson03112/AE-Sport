@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <input type="password" id="NewPass" name="NewPass" class="form-control" value="" placeholder="New password"
-                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
-                                           title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)." 
+                                           pattern="^(?=.*[A-Z]).{8,}$" 
+                                           title="Password must be at least 8 characters long and contain at least one uppercase letter." 
                                            required>
                                 </div>
                                 <div class="col-sm-3">

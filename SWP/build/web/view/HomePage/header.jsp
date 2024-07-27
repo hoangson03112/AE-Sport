@@ -97,7 +97,7 @@
         <%
             CartContext cart = new CartContext();
             int count = cart.countProductInCart();
-            BrandContext brandb = new BrandContext();
+BrandContext brandb = new BrandContext();
             ArrayList<Brand> brands = brandb.getBrands();
             SportContext sportdb = new SportContext();
             ArrayList<sport> sports = sportdb.getSports();
@@ -158,12 +158,13 @@
                     </button>
                     <div class="collapse navbar-collapse col-10 align-items-center row" id="navbarNav">
                         <ul class="col-9 navbar-nav nav fs-5 align-items-center d-flex justify-content-center">
+
                             <li class="nav-item mx-5 dropdown py-3">
-                                <a class="text-decoration-none text-black" role="button" id="navbarDropdownMale" data-bs-popper="static" aria-expanded="false" href="#">NAM</a>
+                                <a class="text-decoration-none text-black" role="button" id="navbarDropdownMale" data-bs-popper="static" aria-expanded="false" href="/SWP/productall">NAM</a>
                                 <ul class="dropdown-menu transition-2 dropdown-sub dropdown-menu-end" aria-labelledby="navbarDropdownMale"> 
                                     <% for (Category cate : listCateMale) {%>
                                     <li class="dropdown-submenu dropend">
-                                        <a class="dropdown-item dropdown-toggle" id="subnavbarDropdown<%=cate.getCategory_ID()%>" role="button" aria-expanded="false"><%=cate.getCategory_Name()%></a>
+                                        <a href="#"class="dropdown-item dropdown-toggle" id="subnavbarDropdown<%=cate.getCategory_ID()%>" role="button" aria-expanded="false"><%=cate.getCategory_Name()%></a>
                                         <% ArrayList<SubCategory> listSubcate = cateDB.getSubCategorys(cate.getCategory_ID());
                                             if (!listSubcate.isEmpty()) {%>
                                         <ul class="dropdown-menu dropdown-submenu-menu" aria-labelledby="subnavbarDropdown<%=cate.getCategory_ID()%>">
@@ -178,7 +179,7 @@
                             </li>
 
                             <li class="nav-item mx-5 dropdown py-3">
-                                <a class="text-decoration-none text-black" role="button" id="navbarDropdownFemale" data-bs-popper="static" aria-expanded="false" href="#">NỮ</a>
+                                <a class="text-decoration-none text-black" role="button" id="navbarDropdownFemale" data-bs-popper="static" aria-expanded="false" href="/SWP/productall">NỮ</a>
                                 <ul class="dropdown-menu transition-2 dropdown-sub dropdown-menu-end" aria-labelledby="navbarDropdownFemale">
                                     <% for (Category cate : listCateFemale) {%>
                                     <li class="dropdown-submenu dropend">
@@ -200,7 +201,7 @@
                                 <a class="text-decoration-none text-black" role="button" data-bs-popper="static" aria-expanded="false" href="#">MÔN THỂ THAO</a>
                                 <ul class="dropdown-menu transition-3 fs-5" aria-labelledby="navbarDropdown">
                                     <% for (sport sport : sports) {%>
-                                    <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%= sport.getSport_Id()%>"><%= sport.getSport_Name()%></a></li>
+                                    <li><a class="dropdown-item" href="/SWP/sport?sport_Id=<%= sport.getSport_Id()%>"><%= sport.getSport_Name()%></a></li>
                                         <% } %>
                                 </ul>
                             </li>
@@ -208,7 +209,7 @@
                                 <a class="text-decoration-none text-black" role="button" data-bs-toggle="static" aria-expanded="false">THƯƠNG HIỆU</a>
                                 <ul class="dropdown-menu transition-4 fs-5">
                                     <% for (Brand b : brands) {%>
-                                    <li><a class="dropdown-item" href="/SWP/subcategory?Subcategory_ID=<%=b.getId()%>"><%=b.getName()%></a></li>
+                                    <li><a class="dropdown-item" href="/SWP/brand?id=<%=b.getId()%>"><%=b.getName()%></a></li>
                                         <% }%>
                                 </ul>
                             </li>
@@ -221,8 +222,6 @@
 
 
                                     <%  }%>
-
-
                                 </ul>
                             </li>
                         </ul>

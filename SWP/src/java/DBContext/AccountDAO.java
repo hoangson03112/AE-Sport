@@ -136,17 +136,16 @@ public class AccountDAO extends DBContext {
     }
 
     public int GetAccountByEmail(String email) {
-        String sql = "SELECT * FROM [dbo].[UserAccounts] where email = ? ";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "SELECT * FROM [dbo].[UserAccounts] WHERE email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("user_ID");
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("user_ID");
+                }
             }
-            return 0;
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace(); // In ra stack trace để biết thêm chi tiết lỗi
         }
         return 0;
     }
@@ -178,32 +177,23 @@ public class AccountDAO extends DBContext {
             System.out.println(e);
         }
     }
-   // Phương thức để lấy báo cáo đăng ký người dùng
+    // Phương thức để lấy báo cáo đăng ký người dùng
 
-
-
-public Map<String, Integer> getAllUserRegistrationReport() {
-    String sql = "SELECT dateCreate, COUNT(*) as registration_count FROM UserAccounts GROUP BY dateCreate";
-    Map<String, Integer> report = new TreeMap<>(); // TreeMap để tự động sắp xếp theo key
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày
-    try (PreparedStatement ps = connection.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-        while (rs.next()) {
-            String date = rs.getString("dateCreate");
-            String formattedDate = dateFormat.format(rs.getDate("dateCreate")); // Định dạng ngày
-            report.put(formattedDate, rs.getInt("registration_count"));
+    public Map<String, Integer> getAllUserRegistrationReport() {
+        String sql = "SELECT dateCreate, COUNT(*) as registration_count FROM UserAccounts GROUP BY dateCreate";
+        Map<String, Integer> report = new TreeMap<>(); // TreeMap để tự động sắp xếp theo key
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                String date = rs.getString("dateCreate");
+                String formattedDate = dateFormat.format(rs.getDate("dateCreate")); // Định dạng ngày
+                report.put(formattedDate, rs.getInt("registration_count"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return report;
     }
-    return report;
-}
-
-
-
-
-
-   
 
     public int getRegistrationsToday() {
         String sql = "SELECT COUNT(*) FROM UserAccounts WHERE dateCreate = CAST(GETDATE() AS DATE)";
@@ -241,11 +231,7 @@ public Map<String, Integer> getAllUserRegistrationReport() {
         return 0;
     }
 
-    
-
-   
 //lấy tất cả tài khoản
-
     public List<UserAccount> getAllUsers() {
         List<UserAccount> userList = new ArrayList<>();
         String sql = "SELECT * FROM UserAccounts";
@@ -284,8 +270,6 @@ public Map<String, Integer> getAllUserRegistrationReport() {
         // Test getRegistrationsThisMonth
         int registrationsThisMonth = dao.getRegistrationsThisMonth();
         System.out.println("Registrations This Month: " + registrationsThisMonth);
-
-       
 
         // Test getAllUsers
         List<UserAccount> userList = dao.getAllUsers();

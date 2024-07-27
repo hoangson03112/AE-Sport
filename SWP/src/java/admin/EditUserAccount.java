@@ -62,7 +62,7 @@ public class EditUserAccount extends HttpServlet {
                     img = img2;
                 }
                 UserAccount userTemp = new UserAccount(userId, password, userName, fullName, email, phone, img);
-                dao.updateUserAccount(userTemp,address);
+                dao.updateUserAccount(userTemp, address);
 
                 if (dao.getUserRoleByUserID(userId).getRoleID() != 6) {
                     response.sendRedirect(request.getContextPath() + "/manageremployeeaccount?edit=" + userId);

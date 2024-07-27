@@ -32,14 +32,13 @@
 
 
 </head>
-<body class="bg-dark p-2 text-dark bg-opacity-25">
+<body class="bg-dark  text-dark bg-opacity-25">
 
     <div class="row">
-        <div class="col-1">
-            <jsp:include page="../Homestaff/SideBar.jsp"/>
+        <div class="col-2">
+            <jsp:include page="../../admin/AdministratorPage.jsp"/>
         </div>
-        <div class="col-11">
-            <<<<<<< Updated upstream
+        <div class="col-10">
             <div class="container   mt-5  bg-body-tertiary">
 
                 <h2>Logo Header:</h2>

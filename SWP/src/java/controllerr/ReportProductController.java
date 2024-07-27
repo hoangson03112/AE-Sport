@@ -43,7 +43,7 @@ public class ReportProductController extends HttpServlet {
     request.setAttribute("topRevenueProduct", topRevenueProduct);
 
     // Chuyển tiếp yêu cầu đến JSP
-    request.getRequestDispatcher("/report/productPerformance.jsp").forward(request, response);
+    request.getRequestDispatcher("/admin/productPerformance.jsp").forward(request, response);
 }
 
 

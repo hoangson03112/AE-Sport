@@ -4,6 +4,7 @@
     Author     : Hoàng Sơn
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="data.BlogContext"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -258,67 +259,19 @@
                                 <span> Tin Tức</span>
                             </a>
                         </li>
-
-                        <li class="nav-item position-relative">
-                            <a href="RequestsBlog?mode=1" class="nav-link" >
-                                <div class="icon-wrap">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                </div>
-                                <span> Yêu Cầu Thêm Tin Tức 
-                                </span>
-                            </a>
-                            <span
-                                class=" position-absolute top-0 end-0 badge rounded bg-danger me-4  fs-7"
-                                >
-                                <%=numberRequestAdd %>
-                            </span>
-                        </li>
-
-                        <li class="nav-item position-relative">
-                            <a href="RequestsBlog?mode=2" class="nav-link " >
-                                <div class="icon-wrap">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                </div>
-                                <span> Yêu Cầu Xóa Tin Tức</span>
-                            </a>
-                            <span
-                                class=" position-absolute top-0 end-0 badge rounded bg-danger me-4  fs-7"
-                                >
-                                <%=numberRequestDelete %>
-                            </span>
-                        </li>
-
-
-
-
-                        <li class="nav-item ">
-
-                            <a href="Setting" class="nav-link " >
-                                <div class="icon-wrap">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                </div>
-
-                                <span> Cài  Đặt Trang Chủ</span>
-                            </a>
-
-                        </li>
-
                     </ul>
-
                     <hr>
-                    <div class="dropdown">
-                        <a href="#" class="text-decoration-none  dropdown-wrap" 
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="icon-wrap">
-                                <img src="" alt="" width="32" height="32" class="rounded-circle">
-                            </div>
-                            <strong>Nhân Viên</strong>
+                    <div class="dropdown mb-5 text-center">
+                        <a href="view/ViewProfile.jsp" class="text-decoration-none  dropdown-wrap"  >
+                            <strong>Nhân Viên </strong>
+                            <c:if test="${sessionScope.CRRAccount != null}">
+                                <span  class="font-monospace text-decoration-none text-white">${sessionScope.CRRAccount.getFull_Name()}</span>
+                            </c:if>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {

@@ -64,7 +64,7 @@ public class OrderController extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Order> listOrder = orderDao.getAllOrders();
         request.setAttribute("listOrder", listOrder);
-        request.getRequestDispatcher("view/OrderList.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/OrderList.jsp").forward(request, response);
     }
 
     public void orderDetail(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +73,7 @@ public class OrderController extends HttpServlet {
         List<OrderItem> items = orderDao.getOrderItems(idOrder);
         request.setAttribute("order", orderDao.getOrderDetail(idOrder));
         request.setAttribute("items", items);
-        request.getRequestDispatcher("view/OrderDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/OrderDetail.jsp").forward(request, response);
     }
 
     public void myOrders(HttpServletRequest request, HttpServletResponse response, int userID)

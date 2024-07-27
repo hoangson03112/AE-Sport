@@ -4,6 +4,7 @@
     Author     : Hoàng Sơn
 --%>
 
+<%@page import="DBContext.AdminDAO"%>
 <%@page import="data.SettingContext"%>
 <%@page import="entity.product"%>
 <%@page import="data.ProductContext"%>
@@ -163,6 +164,10 @@
             ArrayList<String> slide2 = settingDB.getSilde("slide2");
             ArrayList<String> slide3 =  settingDB.getSilde("slide3");
             ArrayList<String> slide4 =  settingDB.getSilde("slide4");
+            
+            // xoa  Discount het han
+            AdminDAO dao = new AdminDAO();
+            dao.deleteExpiredDiscounts();
         %>
     </head>
 
