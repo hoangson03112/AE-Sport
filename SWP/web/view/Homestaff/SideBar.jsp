@@ -293,11 +293,11 @@
                 document.querySelector("#saleProductonHome").classList.add("activee")
             }
 
-            if (currentUrl.includes("hotProductManage")) {
+            if (currentUrl.includes("ManageHotProducts")) {
                 document.getElementById('drop-down2').classList.remove('d-none');
-                document.querySelector("#hotProductManage").classList.add("active")
+                document.querySelector("#hotProductManage").classList.add("activee")
             }
-            if (currentUrl.includes("saleProductManage")) {
+            if (currentUrl.includes("ManageSaleProducts")) {
                 document.getElementById('drop-down2').classList.remove('d-none');
                 document.querySelector("#saleProductManage").classList.add("activee")
             }
