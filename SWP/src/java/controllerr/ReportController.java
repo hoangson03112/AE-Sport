@@ -24,26 +24,22 @@ public class ReportController extends HttpServlet {
             int registrationsToday = dao.getRegistrationsToday();
             int registrationsThisWeek = dao.getRegistrationsThisWeek();
             int registrationsThisMonth = dao.getRegistrationsThisMonth();
-          
 
             request.setAttribute("registrationsToday", registrationsToday);
             request.setAttribute("registrationsThisWeek", registrationsThisWeek);
             request.setAttribute("registrationsThisMonth", registrationsThisMonth);
-          
-          
-
 
             switch (action) {
                 case "registrationReport":
                     handleRegistrationReport(request, response, dao);
                     break;
                 case "activityReport":
-                   
+
                     break;
                 case "customActivityReport":
-                    
+
                     break;
-                
+
                 default:
                     request.setAttribute("error", "Invalid action.");
                     request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
@@ -61,9 +57,6 @@ public class ReportController extends HttpServlet {
         request.setAttribute("registrationReport", report);
         request.getRequestDispatcher("/admin/registrationReport.jsp").forward(request, response);
     }
-
-    
-   
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

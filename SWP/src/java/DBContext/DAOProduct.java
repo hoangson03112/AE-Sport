@@ -61,10 +61,24 @@ public class DAOProduct extends DBContext {
     public List<Product1> pagingProduct(int index) {
         List<Product1> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Product \n"
-                    + "JOIN ImgProduct ON Product.product_ID = ImgProduct.product_ID\n"
-                    + "order by Product.product_ID\n"
-                    + "OFFSET ? rows fetch next 8 rows only";
+            String sql = "SELECT DISTINCT\n"
+                    + "    p.product_ID,\n"
+                    + "    p.product_Name,\n"
+                    + "    p.description,\n"
+                    + "    p.price,\n"
+                    + "	p.status,\n"
+                    + "    i.img_url\n"
+                    + "FROM\n"
+                    + "    Product p\n"
+                    + "JOIN\n"
+                    + "    (SELECT product_ID, MIN(img_url) as img_url\n"
+                    + "     FROM ImgProduct\n"
+                    + "     GROUP BY product_ID) i\n"
+                    + "ON\n"
+                    + "    p.product_ID = i.product_ID\n"
+                    + "ORDER BY\n"
+                    + "    p.product_ID\n"
+                    + "OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, (index - 1) * 8);
 

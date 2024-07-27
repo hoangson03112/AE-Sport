@@ -66,28 +66,36 @@ public class ProductContext extends DBContext.DBContext {
     public product getProduct(int id) {
         product p = new product();
         try {
-            String sql = "SELECT *\n"
-                    + "                             FROM [dbo].[Product] p\n"
-                    + "                              left join [dbo].[Discount] d\n"
-                    + "                         on d.discount_ID = p.discount_ID\n"
-                    + "	 left join  [dbo].[Subcategory] sc\n"
-                    + "	on sc.Subcategory_ID= p.Subcategory_ID\n"
-                    + "	 left join [dbo].[Category] ca\n"
-                    + "	 on ca.category_ID= sc.category_ID\n"
-                    + "                        where p.product_ID=?;";
+            String sql = "SELECT DISTINCT p.product_ID, \n"
+                    + "                p.product_name, \n"
+                    + "                p.price, \n"
+                    + "                d.discount_amount, \n"
+                    + "                sc.subcategory_name, \n"
+                    + "				sc.Subcategory_ID,\n"
+                    + "				ca.category_ID,ca.category_Name,ca.type,\n"
+                    + "                ca.category_name\n"
+                    + "				,p.description,p.Inventory_number\n"
+                    + "				,p.quantity_sold,p.status,d.discount_ID,d.discount_amount,d.discount_Name,d.end_date,d.start_date\n"
+                    + "FROM [dbo].[Product] p\n"
+                    + "LEFT JOIN [dbo].[Discount] d ON d.discount_ID = p.discount_ID\n"
+                    + "LEFT JOIN [dbo].[Subcategory] sc ON sc.Subcategory_ID = p.Subcategory_ID\n"
+                    + "LEFT JOIN [dbo].[Category] ca ON ca.category_ID = sc.category_ID\n"
+                    + "LEFT JOIN [dbo].[ImgProduct] i ON p.product_ID = i.product_ID\n"
+                    + "WHERE p.product_ID = ?;";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 p.setProductID(rs.getInt("product_ID"));
                 p.setProductName(rs.getString("product_Name"));
-                p.setPrice(rs.getInt("price"));
                 p.setStatus(rs.getString("status"));
+                p.setPrice(rs.getInt("price"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity_sold(rs.getInt("quantity_sold"));
                 Discount d = new Discount();
                 d.setDiscount_ID(rs.getInt("discount_ID"));
                 d.setDiscount_Amount(rs.getInt("discount_amount"));
+                d.setDiscount_Name(rs.getString("discount_name"));
                 SubCategory subCa = new SubCategory();
                 subCa.setSubcategory_ID(rs.getInt("Subcategory_ID"));
                 subCa.setSubcategory_Name(rs.getString("Subcategory_Name"));

@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="entity.product"%>
+<%@page import="entity.Brand"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -192,14 +193,11 @@
                 background-position-x: 95%;
                 background-position-y: center;
             }
-            .m-250{
-                margin-top: 250px;
-            }
         </style>
     </head>
     <body >
         <jsp:include page="HomePage/header.jsp"/>
-        <div class="container m-250">
+        <div class="container m-223">
             <nav aria-label="breadcrumb " >
                 <ol class="breadcrumb m-5 ms-0 transition-1">
                     <li class="breadcrumb-item"><span><i class="bi bi-house-door mx-3"></i></span><a href="HomePage" class="text-decoration-none text-black">Home</a></li>
@@ -217,27 +215,44 @@
                     </div>
                 </div>    
                 <c:forEach items="${sessionScope.cart}" var="item">
-                    <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="img/product/${item.key.image.get(0).url}"></div>
-                            <div class="col">
-                                <div class="row text-muted">${item.key.brand.name}</div>
-                                <div class="row">${item.key.productName}</div>
+                    <div class="row border-top border-bottom py-3">
+                        <div class="col-2">
+                            <img class="img-fluid" src="img/product/${item.key.image.get(0).url}">
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-12 text-muted">Loại: ${item.key.subCate.getSubcategory_Name()}</div>
+                                <div class="col-12 text-muted">Kích cỡ: ${item.key.size.get(1).size_Name}</div>
+                                <div class="col-12 text-muted">Màu: ${item.key.color.get(1).color_Name}</div>
+                                <div class="col-12 font-weight-bold">Tên Sản Phẩm: ${item.key.productName}</div>
+                                <div class="col-12">Giá Gốc: <span class="text-danger">${item.key.price} VND</span></div>
+                                <div class="col-12">Phiếu giảm giá của shop: <span class="text-success">${item.key.discount.discount_Amount}%</span></div>
+                                <div class="col-12 text-muted">${item.key.discount.discount_Name}</div>
+
                                 <input type="hidden" value="${item.key.price}" id="item-price-${item.key.productID}" />
                                 <input type="hidden" value="${item.key.discount.discount_Amount}" id="item-discount-${item.key.productID}" />
                             </div>
-                            <div class="col">
-                                <a onclick="decreaseItem(${item.key.productID})" href="#">-</a>
-                                <a href="#" id="number-item-${item.key.productID}" class="border">${item.value}</a>
-                                <a onclick="increaseItem(${item.key.productID})" href="#">+</a>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="row ">
+                                <a onclick="decreaseItem(${item.key.productID})" href="#" class="btn btn-sm btn-outline-secondary">-</a>
+                                <span id="number-item-${item.key.productID}" class=" border my-3  px-2 d-inline-block">${item.value}</span>
+                                <a onclick="increaseItem(${item.key.productID})" href="#" class="btn btn-sm btn-outline-secondary">+</a>
                             </div>
-                            <div class="col price-product" id="price-${item.key.productID}">${item.key.price * item.value * (100 - item.key.discount.discount_Amount) / 100}đ</div>
-                            <div class="col">
-                                <a href="deleteItem?id=${item.key.productID}"><span class="close">&#10005;</span></a>
+                            <div class="row">
+                                <div class="col price-product font-weight-bold" id="price-${item.key.productID}">
+                                    ${item.key.price * item.value * (100 - item.key.discount.discount_Amount) / 100} VND
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-1 text-center">
+                            <a href="deleteItem?id=${item.key.productID}" class="text-danger">
+                                <span class="close">&#10005;</span>
+                            </a>
                         </div>
                     </div>
                 </c:forEach>
+
                 <div class="back-to-shop"><a href="#" onclick="history.back()">&leftarrow;</a><span class="text-muted">Trở Lại Sản Phẩm</span></div>
             </div>
             <div class="col-md-4 summary">

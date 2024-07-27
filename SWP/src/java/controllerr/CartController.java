@@ -4,7 +4,11 @@
  */
 package controllerr;
 
+import Model.Color;
+import Model.Size;
+import data.ImgContext;
 import data.ProductContext;
+import entity.img;
 import entity.product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -74,8 +79,20 @@ public class CartController extends HttpServlet {
                 String resp = "{\"size\" : " + cart.size() + " , \"message\" : \"Sản phẩm đã tồn tại trong giỏ hàng \" }";
                 out.print(resp);
             } else {
-                ProductContext productDB = new ProductContext();
-                product productDetail = productDB.getProduct(productId);
+                    ProductContext productDB = new ProductContext();
+            ImgContext imgDB = new ImgContext();
+            ProductContext sizeDB = new ProductContext();
+            ProductContext colorDB = new ProductContext();
+
+            product productDetail = productDB.getProduct(productId);
+            ArrayList<img> images = imgDB.getImgsofProduct(productId);
+            ArrayList<Size> sizes = sizeDB.getSizebyProductId(productId);
+            ArrayList<Color> colors = colorDB.getColorbyProductId(productId);
+
+            productDetail.setImage(images);
+            productDetail.setSize(sizes);
+            productDetail.setColor(colors);
+                
                 cart.put(productDetail, number);
                 session.setAttribute("cart", cart);
                 String resp = "{\"size\" : " + cart.size() + " , \"message\" : \"Thêm vào giỏ hàng thành công \" }";

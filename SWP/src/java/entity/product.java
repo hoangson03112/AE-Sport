@@ -5,8 +5,10 @@
 package entity;
 
 import Model.Category;
+import Model.Color;
 import Model.Discount;
 import Model.Feedback;
+import Model.Size;
 import java.util.ArrayList;
 
 /**
@@ -29,15 +31,35 @@ public class product {
     private Discount discount;
     private Category cate;
     private SubCategory subCate;
-    private int inventory_number;
-
+ private ArrayList<Size> size;
+private ArrayList<Color> color;
+        private int inventory_number;
+    
+    
+    
     public product() {
     }
+
+    public ArrayList<Size> getSize() {
+        return size;
+    }
+
+    public void setSize(ArrayList<Size> size) {
+        this.size = size;
+    }
+
+    public ArrayList<Color> getColor() {
+        return color;
+    }
+
+    public void setColor(ArrayList<Color> color) {
+        this.color = color;
+    }
+
 
     public Category getCate() {
         return cate;
     }
-
     public void setCate(Category cate) {
         this.cate = cate;
     }
@@ -93,14 +115,14 @@ public class product {
     public String getStatus() {
         return status;
     }
-
-    public int getInventory_number() {
+     public int getInventory_number() {
         return inventory_number;
     }
 
     public void setInventory_number(int inventory_number) {
         this.inventory_number = inventory_number;
     }
+
 
     public void setStatus(String status) {
         this.status = status;
@@ -153,8 +175,7 @@ public class product {
     public void setDiscount(Discount discount) {
         this.discount = discount;
     }
-
-    @Override
+@Override
     public int hashCode() {
         int hash = 5;
         hash = 41 * hash + this.productID;
@@ -180,5 +201,7 @@ public class product {
     public String toString() {
         return "product{" + "productID=" + productID + ", feedback=" + feedback + ", price=" + price + ", image=" + image + ", description=" + description + ", status=" + status + ", sport=" + sport + ", typeID=" + typeID + ", productName=" + productName + ", brand=" + brand + ", quantity_sold=" + quantity_sold + ", discount=" + discount + ", cate=" + cate + ", subCate=" + subCate + ", inventory_number=" + inventory_number + '}';
     }
+
+   
 
 }

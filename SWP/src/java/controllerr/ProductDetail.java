@@ -46,7 +46,7 @@ public class ProductDetail extends HttpServlet {
         request.setAttribute("listImg", listImg);
         request.setAttribute("listColor", listColor);
         request.setAttribute("productDetail", productDetail);
-
+        System.out.println(productDetail.getStatus());
         request.getRequestDispatcher("/view/Product/productDetail.jsp").forward(request, response);
 
     }

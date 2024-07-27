@@ -159,7 +159,11 @@
                 font-size: 1.2em;
             }
 
-
+            .product-img {
+                width: 100%; /* Đặt chiều rộng 100% so với thẻ chứa nó */
+                height: 350px; /* Chiều cao cố định */
+                object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            }
         </style>
     </head>
     <body>
@@ -190,7 +194,8 @@
                     <!-- Third foreach -->
                     <c:forEach items="${listbrand}" var="o">
                         <c:if test="${param.id == o.id}">
-                            ${o.name}/-strong/-heart:>:o:-((:-h<c:set var="found" value="true"/>
+                            ${o.name}
+                            <c:set var="found" value="true"/>
                         </c:if>
                     </c:forEach>
 
@@ -252,7 +257,8 @@
                             </c:forEach>
                         </div>
                     </div>
-                </div>/-strong/-heart:>:o:-((:-h<div class="col-9">
+                </div>
+                <div class="col-9">
                     <div class="row mb-3">
                         <div class="col-md-8">
                             <form method="GET" action="productList" class="form-inline" id="buttonForm">
@@ -284,7 +290,7 @@
                     <div class="row">
                         <c:forEach var="prd" items="${productLists}" varStatus="loop">
                             <div class="col-lg-3 col-md-6 mb-4 product-item">
-                                <img src="img/product/${prd.img}" class="img-fluid" alt="${prd.productName}">
+                                <img src="img/product/${prd.img}" class="img-fluid product-img" alt="${prd.productName}">
                                 <h4>${prd.productName}</h4>
                                 <div class="price mb-3">${prd.status}</div>
                                 <p class="card-text fs-4 text-danger">${prd.price} đ</p>
@@ -292,28 +298,28 @@
                                     <a href="Product?productId=${prd.productID}" class="text-white">
                                         <div class="button-wrapper">
                                             <div class="text">Chi Tiết!</div>
-                                            <span class="icon fs-6">/-strong/-heart:>:o:-((:-h<i class="bi bi-bag-plus"></i>
+                                            <span class="icon fs-6">
+                                                <i class="bi bi-bag-plus"></i>
                                             </span>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </c:forEach>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <c:forEach begin="1" end="${endPage}" var="i">
+                                    <li class="page-item"><a class="page-link" href="productall?index=${i}">${i}</a></li>
+                                    </c:forEach>
+                            </ul>
+                        </nav>
                     </div>
 
 
                 </div>
 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <c:forEach begin="1" end="${endPage}" var="i">
-                            <li class="page-item"><a class="page-link" href="productall?index=${i}">${i}</a></li>
-                            </c:forEach>
-                    </ul>
-                </nav>
+
             </div>
         </div>
-    </div>
-
-</body>
+    </body>
 </html>

@@ -227,7 +227,10 @@ BrandContext brandb = new BrandContext();
                         </ul>
                         <div class="col-2 input-group-text bg-white transition-search border border-black">
                             <span class="bg-white border-end-0 pe-0" id="search-icon"><i class="bi bi-search"></i></span>
-                            <input type="text" class="form-control border-0 form-control" placeholder="Tìm Kiếm Sản Phẩm" aria-label="Search" aria-describedby="search-icon" />
+                            <form action="searchprd" method="GET" >
+                                <input type="text" class="form-control border-0 form-control" placeholder="Tìm Kiếm Sản Phẩm" aria-label="Search" aria-describedby="search-icon" name="keyword"/>
+                            </form>
+
                         </div>
                         <a href="<%=request.getContextPath()%>/CartPage" class="col-1 fs-2 text-danger">
                             <i class="bi bi-cart">

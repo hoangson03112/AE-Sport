@@ -157,11 +157,11 @@
 <jsp:include page="HomePage/footer.jsp"/>
 <script>
     var error = '${requestScope.error}';
-    if(error !== ''){
+    if (error !== '') {
         toastr.error('message', error);
-        setTimeout(function (){
-            window.location.href='${pageContext.request.contextPath}/view/Login.jsp';
-        },5000);
+        setTimeout(function () {
+            window.location.href = '${pageContext.request.contextPath}/Login';
+        }, 5000);
     }
 </script>
 </body>

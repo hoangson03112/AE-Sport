@@ -209,7 +209,7 @@
 
 
                         <label for="price">Giá bán</label>
-                        <!-- Kiểm tra nếu trạng thái sản phẩm không phải là 'sale' -->
+
                         <c:if test="${productDetail.status != 'sale'}">
                             <h1 class="text-danger w-50 text-center">${productDetail.price}đ</h1>
                         </c:if>
@@ -350,6 +350,7 @@
                         <c:if test="${param.productId != p.getProductID()}">
                             <div  class=" bg-body-tertiary  shadow">
                                 <div class="card" style="width: 18rem;">
+
                                     <c:if test="${ p.getStatus() == 'sale'}">
                                         <span  class="  z-1 position-absolute p-2 m-2 rounded-5 text-white bg-danger top-0 end-0 ">-${p.getDiscount().getDiscount_Amount()}%</span>
                                     </c:if>
@@ -472,8 +473,6 @@
                 });
             }
         };
-
-
 
     </script>
 </body>
