@@ -468,9 +468,6 @@
                         <button class="btn btn-primary" type="submit" name="action" value="login">Đăng nhập</button>
                     </form>
 
-                    <button class="btn btn-secondary">
-                        <img src="img/logo/icon-google.png" alt="Băng nhập bằng Google" />Băng nhập bằng Google
-                    </button>
                     <div class="login-footer">
                         Bạn chưa có tài khoản?<a href="Register">Đăng ký!</a>
                     </div>
@@ -509,14 +506,9 @@
                 var passwordField = document.getElementById('password');
                 var type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordField.setAttribute('type', type);
-                this.textContent = type === 'password' ? '👁️' : '🙈'; // Thay đổi biểu tượng
+                this.innerHTML = type === 'password' ? '👁️' : '🙈'; // Thay đổi biểu tượng
             });
-            document.getElementById('togglePassword2').addEventListener('click', function () {
-                var confirmPasswordField = document.getElementById('confirm-password');
-                var type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                confirmPasswordField.setAttribute('type', type);
-                this.textContent = type === 'password' ? '👁️' : '🙈'; // Thay đổi biểu tượng
-            });
+
         </script>
 
 

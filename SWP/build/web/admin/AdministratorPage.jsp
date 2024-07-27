@@ -99,8 +99,6 @@
                             <%=numberRequestDelete %>
                         </span>
 
-
-
                     </li>
                 </ul>
             </div>

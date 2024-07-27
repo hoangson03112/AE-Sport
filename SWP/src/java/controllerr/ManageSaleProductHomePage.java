@@ -71,7 +71,6 @@ public class ManageSaleProductHomePage extends HttpServlet {
             String role = db.getRole(account.getUse_ID());
             int idRole = db.getRoleIDbyRoleName(role);
             ArrayList<String> fetures = db.getFeature(idRole);
-
             if (fetures.contains(servletPath) || "admin".equals(role)) {
                 String type = req.getParameter("type");
                 String select1 = req.getParameter("select1");

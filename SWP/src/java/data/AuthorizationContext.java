@@ -61,7 +61,7 @@ public class AuthorizationContext extends DBContext.DBContext {
             String sql = "SELECT *\n"
                     + "                    FROM  [dbo].[Role] r\n"
                     + "                \n"
-                    + "				    left join \n"
+                    + "	    left join \n"
                     + "[dbo].[Role_Feature] rf\n"
                     + "on rf.role_ID= r.role_ID\n"
                     + "left join [dbo].[Feature] f\n"
@@ -72,7 +72,6 @@ public class AuthorizationContext extends DBContext.DBContext {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString("url"));
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizationContext.class.getName()).log(Level.SEVERE, null, ex);

@@ -46,7 +46,6 @@
                      height="150" >
 
                 <button  type="submit" class="btn btn-outline-success   " data-bs-toggle="modal" data-bs-target="#addImg0">Sửa</button>
-
                 <form method="post" action="Setting">
                     <div class="modal fade" id="addImg0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

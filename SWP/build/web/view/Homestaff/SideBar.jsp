@@ -216,7 +216,7 @@
                     <hr >
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item " >
-                            <a id="home" href="HomeStaff" class="nav-link" aria-current="page">
+                            <a id="home" href="HomePage" class="nav-link" aria-current="page">
                                 <div class="icon-wrap">
                                     <i class="fas fa-home"></i>
                                 </div>
@@ -237,8 +237,6 @@
                             <li><a id="hotProductonHome" class="dropdown-item py-2" href="ManageHotProductHomePage">Sản Phẩm Hot</a></li>
                             <li><a id="saleProductonHome" class="dropdown-item py-2" href="ManageSaleProductHomePage">Sản Phẩm Sale</a></li>
                         </ul>
-
-
                         <li class="nav-item">
                             <a  id="managerProduct" class="nav-link dropdown-toggle" role="button">
                                 <div class="icon-wrap">
@@ -246,11 +244,13 @@
                                 </div>
                                 <span>Quản Lí Sản Phẩm</span>
                             </a>
+
                         </li>
                         <ul id="drop-down2" class="bg-black list-unstyled d-none w-100 text-center">
                             <li><a id="hotProductManage" class="dropdown-item py-2" href="ManageHotProducts">Sản Phẩm Hot</a></li>
                             <li><a id="saleProductManage" class="dropdown-item py-2" href="ManageSaleProducts">Sản Phẩm Sale</a></li>
                         </ul>
+
                         <li class="nav-item">
                             <a href="managerBlog" class="nav-link" id="blog">
                                 <div class="icon-wrap">
@@ -282,9 +282,7 @@
             if (currentUrl.includes("managerBlog")) {
                 document.querySelector("#blog").classList.add("active")
             }
-            if (currentUrl.includes("HomeStaff")) {
-                document.querySelector("#home").classList.add("active")
-            }
+
 
             if (currentUrl.includes("ManageHotProductHomePage")) {
                 document.getElementById('drop-down1').classList.remove('d-none');
@@ -297,7 +295,7 @@
 
             if (currentUrl.includes("hotProductManage")) {
                 document.getElementById('drop-down2').classList.remove('d-none');
-                document.querySelector("#hotProductManage").classList.add("activee")
+                document.querySelector("#hotProductManage").classList.add("active")
             }
             if (currentUrl.includes("saleProductManage")) {
                 document.getElementById('drop-down2').classList.remove('d-none');

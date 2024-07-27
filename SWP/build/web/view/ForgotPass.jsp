@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     </head>
     <body>
-        <!-- Password Reset 1 - Bootstrap Brain Component -->
+
         <div class="bg-light py-3 py-md-5">
             <div class="container">
                 <div class="row justify-content-md-center">
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+
         <c:if test="${not empty requestScope.message}">
             <script>
                 // Thiết lập biến JavaScript từ giá trị JSTL

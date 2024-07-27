@@ -8,7 +8,6 @@
 <%@page import="data.SettingContext"%>
 <%@page import="entity.product"%>
 <%@page import="data.ProductContext"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.ArrayList"%>
@@ -146,13 +145,9 @@
             .button:hover:after {
                 bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
             }
-
             .button:hover:before {
                 bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
             }
-
-
-
 
         </style>
         <%
